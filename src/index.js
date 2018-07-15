@@ -15,3 +15,4 @@ ReactDOM.render(
     content,
     document.getElementById('root')
 );
+
