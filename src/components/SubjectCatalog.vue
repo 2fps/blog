@@ -1,9 +1,11 @@
 <template>
     <div class="catalog-box">
         <h4 class="catalog-title">分类目录</h4>
-        <ul class="catalog-display">
-            <li class="catalog-item" v-for="cata in catalogs" :key="cata.id">{{ cata.name + ' ( ' + cata.num + ' ) ' }}</li>
-        </ul>
+        <div class="catalog-display">
+            <router-link class="catalog-item" v-bind:to="'/' + cata.id" v-for="cata in catalogs" :key="cata.id">
+                <i class="el-icon-document"></i>
+                {{ cata.name + ' ( ' + cata.num + ' ) ' }}</router-link>
+        </div>
 
     </div>
 </template>
@@ -55,11 +57,20 @@ export default {
         list-style: none;
         padding-left: 0px;
         color: rgb(51, 51, 51);
+        overflow: hidden;
         & > .catalog-item {
+            display: block;
             height: 32px;
             line-height: 32px;
             padding-top: 2px;
             padding-bottom: 2px;
+            &:hover {
+                color: #5BC0EB;
+                transition: 0.5s;
+                -webkit-transition: 0.5s;
+                -o-transition: 0.5s;
+                -moz-transition: 0.5s;
+            }
         }
     }
 }

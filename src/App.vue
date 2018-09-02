@@ -7,7 +7,7 @@
       <el-container>
         <el-container>
           <el-main>
-            <contentlogo></contentlogo>
+            <router-view></router-view>
           </el-main>
         </el-container>
         <el-aside width="400px">
@@ -53,7 +53,7 @@ export default {
 }
 </script>
 
-<style scoped lang="less">
+<style lang="less">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -71,12 +71,15 @@ ul {
   padding: 0;
 }
 
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
 a {
-  color: #42b983;
+  text-decoration: none !important;
+}
+a:link, a:visited {
+  color: rgb(76, 76, 76);
+  text-decoration: none !important;
+}
+a:hover, a:active {
+  color: rgb(76, 76, 76);
+  text-decoration: none !important;
 }
 </style>

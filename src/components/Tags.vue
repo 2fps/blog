@@ -2,7 +2,7 @@
     <div class="tags-box">
         <h4 class="tags-title">标签</h4>
         <div class="tags-display">
-            <span class="tag-case" v-for="tag in tags" :key="tag.id">{{ tag.name }}</span>
+            <router-link v-bind:to="'/' + tag.id"  class="tag-case" v-for="tag in tags" :key="tag.id">{{ tag.name }}</router-link>
         </div>
     </div>
 </template>
@@ -70,7 +70,11 @@ export default {
             padding: 0 5px;
             margin: 0 4px 8px 0;
             &:hover {
-                color: #618EBA;
+                color: #5BC0EB;
+                transition: 0.5s;
+                -webkit-transition: 0.5s;
+                -o-transition: 0.5s;
+                -moz-transition: 0.5s;
             }
         }
     }

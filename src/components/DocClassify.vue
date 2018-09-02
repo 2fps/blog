@@ -1,9 +1,12 @@
 <template>
     <div class="classify-box">
         <h4 class="classify-title">文章归类</h4>
-        <ul class="classify-display">
-            <li class="classify-item" v-for="clf in classify" :key="clf.id">{{ clf.name + ' ( ' + clf.num + ' ) ' }}</li>
-        </ul>
+        <div class="classify-display">
+            <router-link v-bind:to="'/' + clf.id" class="classify-item" v-for="clf in classify" :key="clf.id">
+                <i class="el-icon-date"></i>
+                {{ clf.name + ' ( ' + clf.num + ' ) ' }}
+            </router-link>
+        </div>
     </div>
 </template>
 
@@ -55,10 +58,18 @@ export default {
         padding-left: 0px;
         color: rgb(51, 51, 51);
         & > .classify-item {
+            display: block;
             height: 32px;
             line-height: 32px;
             padding-top: 2px;
             padding-bottom: 2px;
+            &:hover {
+                color: #5BC0EB;
+                transition: 0.5s;
+                -webkit-transition: 0.5s;
+                -o-transition: 0.5s;
+                -moz-transition: 0.5s;
+            }
         }
     }
 }

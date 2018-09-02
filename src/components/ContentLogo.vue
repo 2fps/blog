@@ -39,6 +39,16 @@ export default {
 <style scoped lang="less">
 .content-title {
   font-size: 25px;
+  & > a {
+    cursor: pointer;
+  }
+  & > a:hover {
+      color: #5BC0EB;
+      transition: 0.5s;
+      -webkit-transition: 0.5s;
+      -o-transition: 0.5s;
+      -moz-transition: 0.5s;
+  }
 }
 .text {
   font-size: 14px;

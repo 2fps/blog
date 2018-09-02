@@ -1,6 +1,6 @@
 <template>
     <div class="search-box">
-        <el-input v-model="searchContent" placeholder="Search..."></el-input>
+        <el-input v-model="searchContent" auto-complete="off" placeholder="Search..." @keyup.enter.native="onSearch"></el-input>
     </div>
 </template>
 
@@ -9,6 +9,21 @@ export default {
     data() {
         return {
             searchContent: ''
+        }
+    },
+    methods: {
+        onSearch() {
+            let val = this.searchContent
+
+            if (val) {
+                this.$router.push(val);
+            } else {
+                this.$message({
+                    showClose: true,
+                    message: '请输入需要搜索的内容',
+                    type: 'error'
+                });
+            }
         }
     }
 }
