@@ -54,6 +54,10 @@ export default {
 </script>
 
 <style lang="less">
+body, html {
+  padding: 0;
+  margin: 0;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -81,5 +85,9 @@ a:link, a:visited {
 a:hover, a:active {
   color: rgb(76, 76, 76);
   text-decoration: none !important;
+}
+
+.el-header {
+  background-color: rgb(34, 34, 34);
 }
 </style>
