@@ -7,8 +7,13 @@ const routes = [{
     path: '/',
     redirect: '/index'
 }, {
-    path: '/index',
-    component: (resolve) => require(['../components/page/index.vue'], resolve)
+    path: '/frontend',
+    component: (resolve) => require(['../components/page/frontend.vue'], resolve),
+    children: [{
+        path: '/index',
+        name: 'index',
+        component: (resolve) => require(['../components/page/index.vue'], resolve)
+    }]
 }]
 
 export default new VueRouter({
