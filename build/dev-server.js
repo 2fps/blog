@@ -52,7 +52,12 @@ Object.keys(proxyTable).forEach(function (context) {
 })
 
 // handle fallback for HTML5 history API
-app.use(require('connect-history-api-fallback')())
+app.use(require('connect-history-api-fallback')({
+  from: /^\/api\/.*$/,
+  to: function(context) {
+    return context.parsedUrl.path
+  }
+}))
 
 // serve webpack bundle output
 app.use(devMiddleware)
@@ -90,3 +95,7 @@ module.exports = {
     server.close()
   }
 }
+
+app.post('/api/user', function (req, res) {
+  res.send('Hello World!');
+});

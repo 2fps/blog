@@ -32,6 +32,14 @@ export default {
                 name: 'chrome'
             }]
         }
+    },
+    methods: {
+        getTags() {
+            this.$http.post('/api/user')
+        }
+    },
+    mounted() {
+        this.getTags();
     }
 }
 </script>
