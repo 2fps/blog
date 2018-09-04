@@ -6,7 +6,7 @@ const path = require('path')
 
 module.exports = {
   dev: {
-
+    env: require('./dev.env'),
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
@@ -23,7 +23,7 @@ module.exports = {
     // Use Eslint Loader?
     // If true, your code will be linted during bundling and
     // linting errors and warnings will be shown in the console.
-    useEslint: true,
+    useEslint: false,
     // If true, eslint errors and warnings will also be shown in the error overlay
     // in the browser.
     showEslintErrorsInOverlay: false,
@@ -44,6 +44,7 @@ module.exports = {
   },
 
   build: {
+    env: require('./prod.env'),
     // Template for index.html
     index: path.resolve(__dirname, '../dist/index.html'),
 
