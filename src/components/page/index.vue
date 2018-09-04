@@ -1,18 +1,13 @@
 <template>
-    <contentlogo></contentlogo>
+    <contents></contents>
 </template>
 
 <script>
-import ContentLogo from '../ContentLogo'
+import Contents from '../Contents'
 
 export default {
-  components: {
-    'contentlogo': ContentLogo
-  },
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
+    components: {
+        'contents': Contents
     }
-  }
 }
 </script>

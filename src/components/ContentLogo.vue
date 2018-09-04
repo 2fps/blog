@@ -77,5 +77,6 @@ export default {
 
 .box-card {
     text-align: left;
+    margin-bottom: 25px;
 }
 </style>

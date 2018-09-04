@@ -3,21 +3,23 @@
       <el-header>
         <navbar></navbar>
       </el-header>
-      <el-container>
-        <el-container>
+      <el-row :gutter="10" class="font-content">
+        <el-col :xs="24" :sm="14" :md="16" :lg="16" :xl="16">
           <el-main>
             <router-view></router-view>
           </el-main>
-        </el-container>
-        <el-aside width="400px">
+        </el-col>
+        <el-col :xs="0" :sm="10" :md="8" :lg="8" :xl="8">
           <personintro></personintro>
           <globalsearch></globalsearch>
           <tags></tags>
           <subjectcatalog></subjectcatalog>
           <docclassify></docclassify>
-        </el-aside>
-      </el-container>
-      <el-footer>Footer</el-footer>
+        </el-col>
+      </el-row>
+      <el-footer height="180px">
+        <foot></foot>
+      </el-footer>
     </el-container>
 </template>
 
@@ -31,6 +33,7 @@ import PersonIntro from '../PersonIntro'
 import Tags from '../Tags'
 import SubjectCatalog from '../SubjectCatalog'
 import DocClassify from '../DocClassify'
+import Foot from '../Foot'
 
 export default {
   name: 'app',
@@ -41,8 +44,21 @@ export default {
     'personintro': PersonIntro,
     'tags': Tags,
     'subjectcatalog': SubjectCatalog,
-    'docclassify': DocClassify
+    'docclassify': DocClassify,
+    'foot': Foot
     // 'content': Content
   }
 }
 </script>
+
+<style lang="less">
+.el-footer {
+  background-color: rgb(34, 40, 49);
+}
+.font-content {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+</style>
