@@ -97,5 +97,5 @@ module.exports = {
 }
 
 // 设置/routes/index文件为总的路由控制文件
-var routes = require('./routes/index');
+var routes = require('../server/router/index');
 routes(app);

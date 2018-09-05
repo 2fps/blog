@@ -9,33 +9,35 @@
 
 
 <script>
+import arrayRandom from '../assets/arrayRandom.js'
+
 export default {
     data() {
         return {
-            tags: [{
-                id: 'leak',
-                name: '内存泄漏'
-            }, {
-                id: 'html5',
-                name: 'HTML5'
-            }, {
-                id: 'browser',
-                name: '浏览器'
-            }, {
-                id: 'linux',
-                name: 'Linux'
-            }, {
-                id: 'electron',
-                name: 'Electron'
-            }, {
-                id: 'chrome',
-                name: 'chrome'
-            }]
+            tags: []
         }
     },
     methods: {
         getTags() {
-            this.$http.post('/api/user')
+            var me = this;
+
+            this.$http.get('/api/tags').then(function (info) {
+                let tags = info.data.tags;
+                // 检查有无数据
+                if (0 === tags.length) {
+                    // 没有数据
+                    return;
+                }
+                // 过滤tag内容为0的
+                tags = tags.filter(function(val) {
+                    if (val.number > 0) {
+                        return true;
+                    }
+                });
+
+                // 将tags乱序显示
+                me.tags = arrayRandom(info.data.tags);
+            });
         }
     },
     mounted() {
