@@ -96,6 +96,6 @@ module.exports = {
   }
 }
 
-app.post('/api/user', function (req, res) {
-  res.send('Hello World!');
-});
+// 设置/routes/index文件为总的路由控制文件
+var routes = require('./routes/index');
+routes(app);

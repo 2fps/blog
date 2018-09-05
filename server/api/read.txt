@@ -1,0 +1,4 @@
+/config  peizhi , 每页显示条数，目录有啥,xingming,个人
+/search?key=.... 搜索
+/tags  所有tags及其数量
+/tags/[tagName] 该tagName下的详细信息
