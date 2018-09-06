@@ -6,17 +6,17 @@
   <el-card class="box-card" shadow="hover" :body-style="{ padding: '0px' }">
     <div style="padding: 14px;">
       <h1 class="content-title">
-        <a>文章标题</a>
+        <a>{{ article.title }}</a>
       </h1>
       <div class="text item">
-          文章的简单的描述
+          {{ article.summary }}
       </div>
       <div class="bottom clearfix">
-        <span class="time">{{ releaseTime }}</span>&nbsp;
-        <span class="time">{{ mainType }}</span>&nbsp;
-        <span class="time">{{ commentNum }}</span>&nbsp;
-        <span class="time">{{ viewNum }}</span>&nbsp;
-        <span class="time">{{ likeNum }}</span>
+        <span class="time">{{ article.releaseTime }}</span>&nbsp;
+        <span class="time">{{ article.catalogs }}</span>&nbsp;
+        <span class="time">{{ article.commentsNum }}</span>&nbsp;
+        <span class="time">{{ article.viewsNum }}</span>&nbsp;
+        <span class="time">{{ article.likeNum }}</span>
       </div>
     </div>
   </el-card>
@@ -24,15 +24,18 @@
 
 <script>
 export default {
-  data() {
-    return {
-      releaseTime: new Date(),
-      mainType: '前端开发',
-      commentNum: 2,
-      viewNum: 122,
-      likeNum: 9
-    };
-  }
+    props: {
+        article: Object
+    },
+    data() {
+        return {
+            releaseTime: new Date(),
+            mainType: '前端开发',
+            commentNum: 2,
+            viewNum: 122,
+            likeNum: 9
+        };
+    }
 }
 </script>
 

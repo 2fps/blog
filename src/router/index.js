@@ -25,6 +25,15 @@ const routes = [{
         path: '/html5',   // 文章详细内容
         name: 'index',
         component: (resolve) => require(['../components/page/article.vue'], resolve)
+    }, {
+        path: '/tags',
+        component: (resolve) => require(['../components/page/index.vue'], resolve)
+    }, {
+        path: '/catalog',
+        component: (resolve) => require(['../components/page/index.vue'], resolve)
+    }, {
+        path: '/classify',
+        component: (resolve) => require(['../components/page/index.vue'], resolve)
     }]
 }]
 

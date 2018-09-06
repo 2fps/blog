@@ -2,9 +2,9 @@
     <div class="classify-box">
         <h4 class="classify-title">文章归类</h4>
         <div class="classify-display">
-            <router-link v-bind:to="'/' + clf.id" class="classify-item" v-for="clf in classify" :key="clf.id">
+            <router-link v-bind:to="'/classify?key=' + clf.id" class="classify-item" v-for="clf in classify" :key="clf.id">
                 <i class="el-icon-date"></i>
-                {{ clf.name + ' ( ' + clf.num + ' ) ' }}
+                {{ clf.name + ' ( ' + clf.number + ' ) ' }}
             </router-link>
         </div>
     </div>
@@ -14,20 +14,20 @@
 export default {
     data() {
         return {
-            classify: [{
-                id: '1',
-                name: '2018年1月',
-                num: 10
-            }, {
-                id: '2',
-                name: '2018年3月',
-                num: 12
-            }, {
-                id: '3',
-                name: '2018年8月',
-                num: 101
-            }]
+            classify: []
         }
+    },
+    methods: {
+        getClassify: function() {
+            let me = this;
+
+            this.$http.get('/api/classify').then(function(info) {
+                me.classify = info.data.classify;
+            });
+        }
+    },
+    mounted() {
+        this.getClassify();
     }
 }
 </script>

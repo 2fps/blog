@@ -7,22 +7,27 @@ router.get('/', (req, res) => {
     var data = Mock.mock({
         "tags": [
             {
+                "id": 'Electron',
                 "name": 'Electron',
                 "number|0-20": 10,
                 "url": "@url()"
             }, {
+                "id": 'jQuery',
                 "name": 'jQuery',
                 "number|0-20": 10,
                 "url": "@url()"
             }, {
+                "id": 'HTML5',
                 "name": 'HTML5',
                 "number|0-20": 10,
                 "url": "@url()"
             }, {
+                "id": 'tips',
                 "name": 'tips',
                 "number|0-20": 10,
                 "url": "@url()"
             }, {
+                "id": 'tool',
                 "name": '工具',
                 "number|0-20": 10,
                 "url": "@url()"

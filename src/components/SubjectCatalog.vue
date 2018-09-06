@@ -2,9 +2,9 @@
     <div class="catalog-box">
         <h4 class="catalog-title">分类目录</h4>
         <div class="catalog-display">
-            <router-link class="catalog-item" v-bind:to="'/' + cata.id" v-for="cata in catalogs" :key="cata.id">
+            <router-link class="catalog-item" v-bind:to="'/catalog?key=' + cata.id" v-for="cata in catalogs" :key="cata.id">
                 <i class="el-icon-document"></i>
-                {{ cata.name + ' ( ' + cata.num + ' ) ' }}</router-link>
+                {{ cata.name + ' ( ' + cata.number + ' ) ' }}</router-link>
         </div>
 
     </div>
@@ -14,20 +14,20 @@
 export default {
     data() {
         return {
-            catalogs: [{
-                id: 'web',
-                name: 'web前端',
-                num: 10
-            }, {
-                id: 'web2',
-                name: 'web后端',
-                num: 12
-            }, {
-                id: 'da',
-                name: '日记',
-                num: 101
-            }]
+            catalogs: []
         }
+    },
+    methods: {
+        getCatalog: function() {
+            let me = this;
+
+            this.$http.get('/api/catalogs').then(function(info) {
+                me.catalogs = info.data.catalogs;
+            });
+        }
+    },
+    mounted() {
+        this.getCatalog();
     }
 }
 </script>
