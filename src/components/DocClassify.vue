@@ -3,7 +3,7 @@
         <h4 class="classify-title">文章归类</h4>
         <div class="classify-display">
             <router-link v-bind:to="'/classify?key=' + clf.id" class="classify-item" v-for="clf in classify" :key="clf.id">
-                <i class="el-icon-date"></i>
+                <i class="fa fa-calendar"></i>
                 {{ clf.name + ' ( ' + clf.number + ' ) ' }}
             </router-link>
         </div>

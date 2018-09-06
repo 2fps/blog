@@ -5,10 +5,11 @@
                 <div>
                     <p class="footer-icon">
                         <a target="_blank" rel="nofollow" href="http://weibo.com/3628209523">
-                            <i class="fa fa-weibo"></i>
+                            <i class="fa fa-weibo fa-2x"></i>
                         </a>
+                        &nbsp;
                         <a target="_blank" rel="nofollow" href="https://github.com/2fps">
-                            <i class="fa fa-github"></i>
+                            <i class="fa fa-github fa-2x"></i>
                         </a>
                     </p>
                     <p>Copyright 2016 - {{ nowYear }} <a class="footer-link" href="http://www.zhuyuntao.cn">前端驿站</a>. All Rights Reserved.<br><a class="footer-link" href="http://www.miitbeian.gov.cn/" rel="external nofollow" target="_blank">苏ICP备15040567号-1</a></p>

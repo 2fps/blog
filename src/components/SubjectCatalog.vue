@@ -3,7 +3,7 @@
         <h4 class="catalog-title">分类目录</h4>
         <div class="catalog-display">
             <router-link class="catalog-item" v-bind:to="'/catalog?key=' + cata.id" v-for="cata in catalogs" :key="cata.id">
-                <i class="el-icon-document"></i>
+                <i class="fa fa-folder-open-o"></i>
                 {{ cata.name + ' ( ' + cata.number + ' ) ' }}</router-link>
         </div>
 

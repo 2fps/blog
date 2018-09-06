@@ -12,11 +12,16 @@
           {{ article.summary }}
       </div>
       <div class="bottom clearfix">
+        <i class="fa fa-calendar"></i>
         <span class="time">{{ article.releaseTime }}</span>&nbsp;
+        <i class="fa fa-folder-open-o"></i>
         <span class="time">{{ article.catalogs }}</span>&nbsp;
-        <span class="time">{{ article.commentsNum }}</span>&nbsp;
-        <span class="time">{{ article.viewsNum }}</span>&nbsp;
-        <span class="time">{{ article.likeNum }}</span>
+        <i class="fa fa-commenting-o"></i>
+        <span class="time">{{ article.commentsNum }} Comment</span>&nbsp;
+        <i class="fa fa-eye"></i>
+        <span class="time">{{ article.viewsNum }} Views</span>&nbsp;
+        <i class="fa fa-thumbs-o-up"></i>
+        <span class="time">{{ article.likeNum }} Times</span>
       </div>
     </div>
   </el-card>
