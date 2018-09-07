@@ -6,7 +6,7 @@
   <el-card class="box-card" shadow="hover" :body-style="{ padding: '0px' }">
     <div style="padding: 14px;">
       <h1 class="content-title">
-        <a>{{ article.title }}</a>
+        <router-link v-bind:to="'/article'">{{ article.title }}</router-link>
       </h1>
       <div class="text item">
           {{ article.summary }}
