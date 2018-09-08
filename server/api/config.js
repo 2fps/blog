@@ -5,12 +5,11 @@ let Mock = require('mockjs');
 // 获取个人配置信息
 router.get('/', (req, res) => {
     var data = Mock.mock({
-        'list|2': [{
+        'config': {
             'name': "@name(1,2)",
-            'admonition': '@cparagraph(1, 3)',
-            'numOnePage': 10,
-            "userImage":""
-        }]
+            'words': '@cparagraph(1, 3)',
+            "imgSrc":"http://www.zhuyuntao.cn/wp-content/uploads/2016/07/tx-1.jpg"
+        }
     });
     res.send(JSON.stringify(data));
 });

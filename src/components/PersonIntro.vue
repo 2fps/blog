@@ -1,14 +1,51 @@
 <template>
     <aside class="person-introduction clearfix">
         <div class="photo-wrapper">
-            <img class="about-photo" src="http://www.zhuyuntao.cn/wp-content/uploads/2016/07/tx-1.jpg">
+            <img class="about-photo" :src="myImgSrc">
         </div>
-        <h4 class="person-title">zyt</h4>
+        <h4 class="person-title">{{ myName }}</h4>
         <div class="person-content">
-            <p>一个不懂后端的前端开发者不是一个好的设计师。</p>
+            <p>{{ myWords }}</p>
         </div>
     </aside>
 </template>
+
+<script>
+export default {
+    data() {
+        return {
+
+        }
+    },
+    computed: {
+        myName: function() {
+            return this.$store.state.config.name
+        },
+        myWords: function() {
+            return this.$store.state.config.words
+        },
+        myImgSrc: function() {
+            return this.$store.state.config.imgSrc
+        }
+    },
+    methods: {
+        getConfig() {
+            var me = this;
+
+            this.$http.get('/api/config').then(function (info) {
+                let config = info.data.config;
+
+                me.$store.commit('setName', config.name)
+                me.$store.commit('setWords', config.words)
+                me.$store.commit('setImgSrc', config.imgSrc)
+            });
+        }
+    },
+    mounted() {
+        this.getConfig();
+    }
+}
+</script>
 
 <style lang="less" scoped>
 .person-introduction {
