@@ -2,7 +2,7 @@
     <div class="tags-box">
         <h4 class="tags-title">标签</h4>
         <div class="tags-display">
-            <router-link v-bind:to="'/tags?key=' + tag.id"  class="tag-case" v-for="tag in tags" :key="tag.id">{{ tag.name }}</router-link>
+            <router-link v-bind:to="'/tags?key=' + tag.id"  class="tag-case" v-for="tag in tags" :key="tag.id" @click.native="tagDetail(tag.id)">{{ tag.name }}</router-link>
         </div>
     </div>
 </template>
@@ -38,6 +38,12 @@ export default {
                 // 将tags乱序显示
                 me.tags = arrayRandom(info.data.tags);
             });
+        },
+        tagDetail(id) {
+            this.$store.commit('setMode', {
+                mode: '标签目录',
+                modeContent: id
+            })
         }
     },
     mounted() {

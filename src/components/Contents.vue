@@ -1,9 +1,9 @@
 <template>
     <div>
-        <el-card class="search-title-box" :body-style="{ padding: '0px' }">
+        <el-card class="search-title-box" :body-style="{ padding: '0px' }" v-if="$store.state.article.mode">
             <div style="padding: 14px;">
             <h3 class="content-title">
-                <a>标签目录：AngularJS1.x</a>
+                <a>{{ title }}</a>
             </h3>
             </div>
         </el-card>
@@ -33,6 +33,11 @@ export default {
     data() {
         return {
             articles: []
+        }
+    },
+    computed: {
+        title: function() {
+            return this.$store.state.article.mode + ':' + this.$store.state.article.modeContent;
         }
     },
     methods: {

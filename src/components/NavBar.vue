@@ -29,7 +29,7 @@
           </router-link>
         </el-submenu>
         <el-menu-item index="3">
-          <router-link to="/index">主页</router-link>
+          <router-link to="/index" @click.native="backToIndex()">主页</router-link>
         </el-menu-item>
         <el-menu-item index="4"><a target="_blank">
           <router-link to="/manage">管理</router-link>
@@ -38,18 +38,24 @@
 </template>
 
 <script>
-  export default {
+export default {
     data() {
-      return {
-        activeIndex: '3'
-      };
+        return {
+            activeIndex: '3'
+        }
     },
     methods: {
-      handleSelect(key, keyPath) {
-        console.log(key, keyPath);
-      }
+        handleSelect(key, keyPath) {
+            console.log(key, keyPath);
+        },
+        backToIndex() {
+            this.$store.commit('setMode', {
+                mode: '',
+                modeContent: ''
+            })
+        }
     }
-  }
+}
 </script>
 
 <style scoped lang="less">
