@@ -32,7 +32,7 @@
           <router-link to="/index" @click.native="backToIndex()">主页</router-link>
         </el-menu-item>
         <el-menu-item index="4"><a target="_blank">
-          <router-link to="/manage">管理</router-link>
+          <router-link to="/login">管理</router-link>
         </a></el-menu-item>
     </el-menu>
 </template>

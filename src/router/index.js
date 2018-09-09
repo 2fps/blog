@@ -35,6 +35,17 @@ const routes = [{
         path: '/classify',
         component: (resolve) => require(['../components/page/index.vue'], resolve)
     }]
+}, {
+    path: '/login',
+    component: (resolve) => require(['../components/page/login.vue'], resolve)
+}, {
+    path: '/manager',
+    component: (resolve) => require(['../components/page/manager.vue'], resolve),
+    children: [{
+        path: '/overview',
+        name: 'overview',
+        component: (resolve) => require(['../components/page/overview.vue'], resolve)
+    }]
 }]
 
 export default new VueRouter({
