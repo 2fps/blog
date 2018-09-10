@@ -45,6 +45,10 @@ const routes = [{
         path: '/overview',
         name: 'overview',
         component: (resolve) => require(['../components/page/overview.vue'], resolve)
+    }, {
+        path: '/convention',
+        name: 'convention',
+        component: (resolve) => require(['../components/page/convention.vue'], resolve)
     }]
 }]
 
