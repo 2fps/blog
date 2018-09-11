@@ -49,6 +49,26 @@ const routes = [{
         path: '/convention',
         name: 'convention',
         component: (resolve) => require(['../components/page/convention.vue'], resolve)
+    }, {
+        path: '/reader',
+        name: 'reader',
+        component: (resolve) => require(['../components/page/reader.vue'], resolve)
+    }, {
+        path: '/allArticles',
+        name: 'allArticles',
+        component: (resolve) => require(['../components/page/allArticles.vue'], resolve)
+    }, {
+        path: '/writeArticle',
+        name: 'writeArticle',
+        component: (resolve) => require(['../components/page/writeArticle.vue'], resolve)
+    }, {
+        path: '/allCatalog',
+        name: 'allCatalog',
+        component: (resolve) => require(['../components/page/allCatalog.vue'], resolve)
+    }, {
+        path: '/allTags',
+        name: 'allTags',
+        component: (resolve) => require(['../components/page/allTags.vue'], resolve)
     }]
 }]
 

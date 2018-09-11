@@ -20,18 +20,24 @@
                 </template>
                 <el-menu-item-group>
                     <el-menu-item index="/convention">常规</el-menu-item>
-                    <el-menu-item index="1-2">阅读</el-menu-item>
+                    <el-menu-item index="/reader">阅读</el-menu-item>
                 </el-menu-item-group>
             </el-submenu>
-            <el-menu-item index="2">
-                <i class="el-icon-menu"></i>
-                <span slot="title">导航二</span>
-            </el-menu-item>
+            <el-submenu index="2">
+                <template slot="title">
+                    <i class="fa fa-cogs fa-lg"></i>&nbsp;
+                    <span slot="title">文章</span>
+                </template>
+                <el-menu-item-group>
+                    <el-menu-item index="/allArticles">所有文章</el-menu-item>
+                    <el-menu-item index="/writeArticle">写文章</el-menu-item>
+                    <el-menu-item index="/allCatalog">分类目录</el-menu-item>
+                    <el-menu-item index="/allTags">标签</el-menu-item>
+                </el-menu-item-group>
+            </el-submenu>
         </el-menu>
     </div>
 </template>
-
-
 
 <style>
 </style>

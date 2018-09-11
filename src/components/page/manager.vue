@@ -11,7 +11,7 @@
                 <el-main style="background-color: #F1F1F1">
                     <router-view></router-view>
                 </el-main>
-                <el-footer>Footer</el-footer>
+                <el-footer class="manager-footer">欢迎使用某某主题</el-footer>
             </el-container>
         </el-container>
     </el-container>
@@ -40,6 +40,12 @@ export default {
     .manager-left {
         background-color: rgb(34, 40, 49);
         width: 200px !important;
+    }
+    .manager-footer {
+        height: 30px !important;
+        line-height: 30px;
+        text-align: left;
+        font-style: italic;
     }
 }
 .el-header {
