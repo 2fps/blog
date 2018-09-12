@@ -1,0 +1,9 @@
+.ql-container {
+    background-color: #fff;
+}
+.el-collapse-item__header {
+    padding:3px 15px;
+}
+.el-collapse-item__content {
+    padding: 5px 10px;
+}
