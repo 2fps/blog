@@ -59,6 +59,7 @@
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
     "mockjs": "^1.0.1-beta3",
+    "mongoose": "^5.2.14",
     "nightwatch": "^0.9.12",
     "node-notifier": "^5.1.2",
     "node-sass": "^4.9.3",

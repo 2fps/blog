@@ -13,6 +13,7 @@ var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = process.env.NODE_ENV === 'testing'
   ? require('./webpack.prod.conf')
   : require('./webpack.dev.conf')
+let mongoose = require("../server/dataDB/db");
 
 // default port where dev server listens for incoming traffic
 var port = 8082;// process.env.PORT || config.dev.port
