@@ -8,11 +8,11 @@
                 名称
             </el-col>
             <el-col :span="16">
-                <el-input v-model="siteName" placeholder="请输入标签名"></el-input>
+                <el-input v-model="tagname" placeholder="请输入标签名"></el-input>
             </el-col>
         </el-row>
         <el-r>
-            <el-button type="primary" plain>添加新标签</el-button>
+            <el-button type="primary" plain @click.native="addNewTag()">添加新标签</el-button>
         </el-r>
         <br />
         <el-table
@@ -45,6 +45,7 @@ import CheckUpdate from '../CheckUpdate'
 export default {
     data() {
         return {
+            tagname: '',
             alltags: [{
                 name: 'HTML5',
                 num: 12
@@ -61,17 +62,17 @@ export default {
         'checkupdate': CheckUpdate
     },
     methods: {
-        setPiece: function() {
-            for (let i = 5; i < 21; ++i) {
-                this.pieces.push({
-                    label: i,
-                    value: i
-                });
-            }
-        }
+        addNewTag: function() {
+            // 输入框内容校验
+            var tName = this.tagname;
+
+            this.$http.post('/api/tags', {
+                name: tName
+            });
+        },
+        handleSelectionChange: function() {}
     },
     mounted() {
-        this.setPiece()
     }
 }
 </script>

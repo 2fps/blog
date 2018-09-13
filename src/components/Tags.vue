@@ -22,7 +22,7 @@ export default {
             var me = this;
 
             this.$http.get('/api/tags').then(function (info) {
-                let tags = info.data.tags;
+                let tags = info.data;
                 // 检查有无数据
                 if (0 === tags.length) {
                     // 没有数据
@@ -36,7 +36,7 @@ export default {
                 });
 
                 // 将tags乱序显示
-                me.tags = arrayRandom(info.data.tags);
+                me.tags = arrayRandom(info.data);
             });
         },
         tagDetail(id) {

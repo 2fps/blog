@@ -8,12 +8,15 @@ if (!process.env.NODE_ENV) {
 var opn = require('opn')
 var path = require('path')
 var express = require('express')
+let mongoose = require("../server/dataDB/db");
+let bodyParser = require('body-parser') ;
+
+
 var webpack = require('webpack')
 var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = process.env.NODE_ENV === 'testing'
   ? require('./webpack.prod.conf')
   : require('./webpack.dev.conf')
-let mongoose = require("../server/dataDB/db");
 
 // default port where dev server listens for incoming traffic
 var port = 8082;// process.env.PORT || config.dev.port
@@ -71,6 +74,8 @@ app.use(hotMiddleware)
 var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
 app.use(staticPath, express.static('./static'))
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 var uri = 'http://localhost:' + port
 
 var _resolve
