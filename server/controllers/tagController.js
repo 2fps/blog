@@ -3,13 +3,34 @@ let router = express.Router();
 let Tag = require('../models/tagModel');
 
 router.get('/', (req, res) => {
-    Tag.find({}, function(err, result) {
+    let params = req.query,
+        from = 0,
+        offset = 10;
+    
+    if (0 !== Object.keys(params)) {
+        from = params.from;
+        offset = params.offset;
+    }
+    
+    Tag.find({}).skip(from).limit(offset).exec(function(err, result) {
         if (err) {
             return console.log(err);
         }
 
         res.json(result);
     });
+});
+
+router.get('/length', (req, res) => {
+    Tag.estimatedDocumentCount((err, count) => {
+        if (err) {
+            return console.log(err);
+        }
+
+        res.json({
+            count: count
+        });
+    })
 });
 
 router.post('/', (req, res) => {
