@@ -1,6 +1,8 @@
 <template>
     <div class="reader-box">
         <checkupdate></checkupdate>
+        <h3>设置</h3>
+        <h1>阅读</h1>
         <el-row :gutter="20" class="el-form-item">
             <el-col :span="4" class="input-title">
                 单页至多显示
@@ -17,9 +19,9 @@
                 <span>篇文章</span>
             </el-col>
         </el-row>
-        <el-r>
-            <el-button type="primary" plain>确认</el-button>
-        </el-r>
+        <el-row>
+            <el-button type="primary" plain @click.native="setNewPiece()">确认</el-button>
+        </el-row>
     </div>
 
 </template>
@@ -37,18 +39,40 @@ export default {
     components: {
         'checkupdate': CheckUpdate
     },
-    methods: {
-        setPiece: function() {
+    methods: {        // 获取站点配置
+        getInfo: function() {
+            this.$http.get('/api/website').then((info) => {
+                let webInfo = info.data;
+
+                this.arts = webInfo.numInpage;
+            });
+        },
+        getPiece: function() {
+            // 页数暂时写在客户端吧
             for (let i = 5; i < 21; ++i) {
                 this.pieces.push({
                     label: i,
                     value: i
                 });
             }
+        },
+        setNewPiece: function() {
+            let params = 'numInpage=' + this.arts;
+
+            this.$http.put('/api/website?' + params).then((res) => {
+                if (0 === res.data.code) {
+                    this.$message({
+                        showClose: true,
+                        message: '添加成功',
+                        type: 'success'
+                    });
+                }
+            });
         }
     },
     mounted() {
-        this.setPiece()
+        this.getPiece();
+        this.getInfo();
     }
 }
 </script>
