@@ -16,27 +16,6 @@
         </el-row>
         <br />
         <tagtable :cols="tagCols" prefix="tags" ref="tagtable"></tagtable>
-<!--         <el-table
-            class="tags-table"
-            ref="tagTable"
-            stripe
-            :data="alltags"
-            tooltip-effect="dark"
-            style="width: 100%"
-            @selection-change="handleSelectionChange">
-            <el-table-column
-            type="selection"
-            width="55">
-            </el-table-column>
-            <el-table-column
-            prop="name"
-            label="名称">
-            </el-table-column>
-            <el-table-column
-            prop="num"
-            label="总数">
-            </el-table-column>
-        </el-table> -->
     </div>
 </template>
 
@@ -49,7 +28,7 @@ export default {
         return {
             tagname: '',
             alltags: [],
-            tagCols: [{
+            tagCols: [{         // tag页面table的列
                 name: 'name',
                 labelname: '名称'
             }, {
@@ -63,6 +42,7 @@ export default {
         'tagtable': Table
     },
     methods: {
+        // 新增标签
         addNewTag: function() {
             // 输入框内容校验
             var tName = this.tagname;
@@ -94,11 +74,7 @@ export default {
                 });
             });
         },
-        getAllTags: function () {
-            this.$http.get('/api/tags').then((info) => {
-                this.alltags = info.data;
-            });
-        },
+        // 成功添加后的提示和数据处理
         finishAdd: function() {
             this.$message({
                 showClose: true,

@@ -12,7 +12,7 @@
             style="width: 100%"
             :page-sizes="[10,20,50,100]"
             :page-size="pageSize"
-            @selection-change="handleSelectionChange">
+            @selection-change="selectionChange">
             <el-table-column
             type="selection"
             width="55">
@@ -53,11 +53,13 @@ export default {
             count: 0,
             pageSize: 10,
             currentPage: 0,
-            from: 0         // 第一条的位置
+            selectedArr: [],    // 已被select中的
+            from: 0             // 第一条的位置
         }
     },
     methods: {
-        handleSelectionChange: function() {
+        selectionChange: function(val) {
+            this.selectedArr = val;
         },
         getDataInfo: function () {
             // 组url
@@ -85,6 +87,7 @@ export default {
             this.from = (curPage - 1) * this.pageSize;
             this.getDataInfo();
         },
+        // 单个项删除
         deleteInfo: function(index, row) {
             let deleteName = row.name;
 
@@ -99,10 +102,29 @@ export default {
                     this.getDataInfo();
                     this.getCount();
                 }
-            })
+            });
         },
+        // 批量删除
         deleteChoose: function() {
-            
+            let names = [];
+
+            this.selectedArr.forEach((val, ind) => {
+                names.push(val.name)
+            });
+
+            // 参数是通过间隔,的方式区分的
+            this.$http.delete('/api/' + this.prefix + '?name=' + names.join(',')).then((res) => {
+                if (0 === res.data.code) {
+                    this.$message({
+                        showClose: true,
+                        message: '删除成功',
+                        type: 'success'
+                    });
+                    // 成功重新刷新
+                    this.getDataInfo();
+                    this.getCount();
+                }
+            });
         }
     },
     mounted() {

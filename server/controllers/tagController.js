@@ -2,6 +2,7 @@ let express = require('express');
 let router = express.Router();
 let Tag = require('../models/tagModel');
 
+// 获取tags
 router.get('/', (req, res) => {
     let params = req.query,
         from = 0,
@@ -21,6 +22,7 @@ router.get('/', (req, res) => {
     });
 });
 
+// 获取tag长度
 router.get('/length', (req, res) => {
     Tag.estimatedDocumentCount((err, count) => {
         if (err) {
@@ -33,16 +35,18 @@ router.get('/length', (req, res) => {
     })
 });
 
+// 新增数据
 router.post('/', (req, res) => {
     let newName = req.body.name;
 
+    // name唯一性校验
     Tag.isExist(newName, function(err, count) {
         // 不存在则添加
         if (!count) {
             let newTag = new Tag({
                 name: req.body.name
             });
-            
+            // 保存
             newTag.save(function(err) {
                 let result = {};
                 if (err) {
@@ -67,36 +71,23 @@ router.post('/', (req, res) => {
 
 // tag删除
 router.delete('/', (req, res) => {
-    let params = req.query;
+    let deleteNames = req.query.name.split(','),
+        code = 0;
 
-    Tag.isExist(params.name, function(err, count) {
-        let code = 0;
-
-        if (count) {
-            // 有则删除
-            Tag.remove({
-                name: params.name
-            }, function(err) {
-                if (err) {
-                    code = 1;
-                } else {
-                    code = 0;
-                }
-            })
-        } else {
-            // 无此数据
-            code = 3;
+    Tag.deleteMany({
+        name: {
+            $in: deleteNames
         }
-        res.json({
-            code: code
-        });
+    }, function(err) {
+        if (err) {
+            code = 1;
+        } else {
+            code = 0;
+        }
+    });
+    res.json({
+        code: code
     });
 })
-
-
-
-
-
-
 
 module.exports = router;
