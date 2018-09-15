@@ -34,23 +34,64 @@ router.get('/length', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    console.log(req.body);
-    let newTag = new Tag({
-        name: req.body.name
-    });
+    let newName = req.body.name;
 
-    newTag.save(function(err) {
-        let result = {};
-        if (err) {
-            result.code = 1;
+    Tag.isExist(newName, function(err, count) {
+        // 不存在则添加
+        if (!count) {
+            let newTag = new Tag({
+                name: req.body.name
+            });
+            
+            newTag.save(function(err) {
+                let result = {};
+                if (err) {
+                    result.code = 1;
+                } else {
+                    result.code = 0;
+                }
+        
+                res.json(result);
+            });
         } else {
-            result.code = 0;
+            // 提示已经存在了
+            res.json({
+                code: -1
+            });
         }
 
-        res.json(result);
     });
+
 });
 
+
+// tag删除
+router.delete('/', (req, res) => {
+    let params = req.query;
+
+    Tag.isExist(params.name, function(err, count) {
+        let code = 0;
+
+        if (count) {
+            // 有则删除
+            Tag.remove({
+                name: params.name
+            }, function(err) {
+                if (err) {
+                    code = 1;
+                } else {
+                    code = 0;
+                }
+            })
+        } else {
+            // 无此数据
+            code = 3;
+        }
+        res.json({
+            code: code
+        });
+    });
+})
 
 
 

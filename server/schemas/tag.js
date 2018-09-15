@@ -8,5 +8,9 @@ let tagSchema = new mongoose.Schema({
     }
 });
 
+tagSchema.statics.isExist = function(name, fn) {
+    return this.countDocuments({'name': name}, fn);
+};
+
 
 module.exports = tagSchema;

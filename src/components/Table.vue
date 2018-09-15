@@ -1,5 +1,8 @@
 <template>
     <div>
+        <el-row>
+            <el-button type="danger" plain @click.native="deleteChoose()">删除选中</el-button>
+        </el-row>
         <el-table
             class="tags-table"
             ref="tagTable"
@@ -18,6 +21,14 @@
             :key="ind"
             :prop="col.name"
             :label="col.labelname">
+            </el-table-column>
+            <el-table-column label="操作">
+                <template slot-scope="scope">
+                    <el-button
+                    size="mini"
+                    type="danger"
+                    @click="deleteInfo(scope.$index, scope.row)">删除</el-button>
+            </template>
             </el-table-column>
         </el-table>
         <el-pagination
@@ -73,6 +84,25 @@ export default {
             // 重新计算要显示的第一条数据的位置
             this.from = (curPage - 1) * this.pageSize;
             this.getDataInfo();
+        },
+        deleteInfo: function(index, row) {
+            let deleteName = row.name;
+
+            this.$http.delete('/api/' + this.prefix + '?name=' + deleteName).then((res) => {
+                if (0 === res.data.code) {
+                    this.$message({
+                        showClose: true,
+                        message: '删除成功',
+                        type: 'success'
+                    });
+                    // 成功重新刷新
+                    this.getDataInfo();
+                    this.getCount();
+                }
+            })
+        },
+        deleteChoose: function() {
+            
         }
     },
     mounted() {
@@ -85,5 +115,8 @@ export default {
 <style lang="less" scoped>
 .table-pagination {
     text-align: center;
+}
+.tags-table {
+    margin-top: 10px;
 }
 </style>

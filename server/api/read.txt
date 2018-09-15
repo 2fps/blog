@@ -2,3 +2,9 @@
 /search?key=.... 搜索
 /tags  所有tags及其数量
 /tags/[tagName] 该tagName下的详细信息
+
+
+0： 操作成功
+-1: 已经存在了
+1： 操作失败
+3：无此数据 

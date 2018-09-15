@@ -79,7 +79,12 @@ export default {
 
             this.$http.post('/api/tags', {
                 name: tName
-            }).then(() => {
+            }).then((res) => {
+                if (0 !== res.data.code) {
+                    // error
+                    alert(res.data.code);
+                    return;
+                }
                 // 添加后重新获取数据
                 this.$nextTick(() => {
                     this.$refs.tagtable.getDataInfo();
