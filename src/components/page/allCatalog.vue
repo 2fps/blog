@@ -8,59 +8,79 @@
                 名称
             </el-col>
             <el-col :span="16">
-                <el-input v-model="siteName" placeholder="请输入分类目录名"></el-input>
+                <el-input v-model="catalogName" placeholder="请输入分类目录名"></el-input>
             </el-col>
         </el-row>
-        <el-r>
-            <el-button type="primary" plain>添加新分类目录</el-button>
-        </el-r>
+        <el-row>
+            <el-button type="primary" plain @click.native="addNewCatalog()">添加新分类目录</el-button>
+        </el-row>
         <br />
-        <el-table
-            class="catalog-table"
-            ref="catalogTable"
-            stripe
-            :data="catalogTable"
-            tooltip-effect="dark"
-            style="width: 100%"
-            @selection-change="handleSelectionChange">
-            <el-table-column
-            type="selection"
-            width="55">
-            </el-table-column>
-            <el-table-column
-            prop="name"
-            label="名称">
-            </el-table-column>
-            <el-table-column
-            prop="num"
-            label="总数">
-            </el-table-column>
-        </el-table>
+        <tagtable :cols="catalogCols" prefix="catalogs" ref="catalogtable"></tagtable>
     </div>
 </template>
 
 <script>
 import CheckUpdate from '../CheckUpdate'
+import Table from '../Table'
 
 export default {
     data() {
         return {
-            catalogTable: [{
-                name: 'Web前端',
-                num: 12
+            catalogCols: [{
+                name: 'name',
+                labelname: '名称'
             }, {
-                name: 'Web后端',
-                num: 21
-            }, {
-                name: '数据库',
-                num: 9
-            }]
+                name: 'num',
+                labelname: '总数'
+            }],
+            catalogName: ''
         }
     },
     components: {
-        'checkupdate': CheckUpdate
+        'checkupdate': CheckUpdate,
+        'tagtable': Table
     },
     methods: {
+        addNewCatalog: function() {
+            // 输入框内容校验
+            var tName = this.catalogName;
+
+            if (0 === tName.length) {
+                this.$message({
+                    showClose: true,
+                    message: '请输入标签名',
+                    type: 'error'
+                });
+
+                return;
+            }
+
+            this.$http.post('/api/catalogs', {
+                name: tName
+            }).then((res) => {
+                if (0 !== res.data.code) {
+                    // error
+                    alert(res.data.code);
+                    return;
+                }
+                // 添加后重新获取数据
+                this.$nextTick(() => {
+                    this.$refs.catalogtable.getDataInfo();
+                    this.$refs.catalogtable.getCount();
+
+                    this.finishAdd();
+                });
+            });
+        },
+        // 成功添加后的提示和数据处理
+        finishAdd: function() {
+            this.$message({
+                showClose: true,
+                message: '添加成功',
+                type: 'success'
+            });
+            this.catalogName = '';
+        }
     },
     mounted() {
     }

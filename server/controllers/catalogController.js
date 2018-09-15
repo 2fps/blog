@@ -1,8 +1,8 @@
+let Catalog = require('../models/catalogModel');
 let express = require('express');
 let router = express.Router();
-let Tag = require('../models/tagModel');
 
-// 获取tags
+// 获取分类目录信息
 router.get('/', (req, res) => {
     let params = req.query,
         from = 0,
@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
         offset = params.offset;
     }
     
-    Tag.find({}).skip(from).limit(offset).exec(function(err, result) {
+    Catalog.find({}).skip(from).limit(offset).exec(function(err, result) {
         if (err) {
             return console.log(err);
         }
@@ -22,9 +22,10 @@ router.get('/', (req, res) => {
     });
 });
 
-// 获取tag长度
+
+// 获取分类目录长度
 router.get('/length', (req, res) => {
-    Tag.estimatedDocumentCount((err, count) => {
+    Catalog.estimatedDocumentCount((err, count) => {
         if (err) {
             return console.log(err);
         }
@@ -35,19 +36,19 @@ router.get('/length', (req, res) => {
     })
 });
 
-// 新增数据
+// 新增分类目录数据
 router.post('/', (req, res) => {
     let newName = req.body.name;
 
     // name唯一性校验
-    Tag.isExist(newName, function(err, count) {
+    Catalog.isExist(newName, function(err, count) {
         // 不存在则添加
         if (!count) {
-            let newTag = new Tag({
+            let newCatalog = new Catalog({
                 name: req.body.name
             });
             // 保存
-            newTag.save(function(err) {
+            newCatalog.save(function(err) {
                 let result = {};
                 if (err) {
                     result.code = 1;
@@ -63,18 +64,15 @@ router.post('/', (req, res) => {
                 code: -1
             });
         }
-
     });
-
 });
 
-
-// tag删除
+// 分类目录删除
 router.delete('/', (req, res) => {
     let deleteNames = req.query.name.split(','),
         code = 0;
 
-    Tag.deleteMany({
+    Catalog.deleteMany({
         name: {
             $in: deleteNames
         }
@@ -89,5 +87,6 @@ router.delete('/', (req, res) => {
         code: code
     });
 });
+
 
 module.exports = router;
