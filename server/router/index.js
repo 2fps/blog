@@ -4,7 +4,7 @@ module.exports = function(app){
     let tags = require('../controllers/tagController');
     let catalogs = require('../controllers/catalogController');
     let classify = require('../api/classify');
-    let articles = require('../api/articles');
+    let articles = require('../controllers/articleController');
 
     app.use('/api/website', website);
     app.use('/api/tags', tags);

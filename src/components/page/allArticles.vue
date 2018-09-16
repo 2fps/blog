@@ -47,6 +47,18 @@
             prop="date"
             label="日期">
             </el-table-column>
+            <el-table-column label="操作">
+                <template slot-scope="scope">
+                    <el-button
+                    size="mini"
+                    type="success"
+                    @click="deleteInfo(scope.$index, scope.row)">查看</el-button>
+                    <el-button
+                    size="mini"
+                    type="warning"
+                    @click="deleteInfo(scope.$index, scope.row)">编辑</el-button>
+            </template>
+            </el-table-column>
         </el-table>
     </div>
 </template>
@@ -57,6 +69,7 @@ import CheckUpdate from '../CheckUpdate'
 export default {
     data() {
         return {
+            dataInfo: [],
             alltags: [{
                 title: 'HTML5',
                 author: 'zyt',
@@ -79,10 +92,13 @@ export default {
                     value: i
                 });
             }
+        },
+        getDataInfo: function() {
+            this.$http.get('/api/articles');
         }
     },
     mounted() {
-        this.setPiece()
+        // this.getDataInfo();
     }
 }
 </script>
