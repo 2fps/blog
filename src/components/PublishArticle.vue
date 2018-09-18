@@ -5,8 +5,12 @@
                 <el-button plain size="small">保存草稿</el-button>
                 <el-button plain size="small">预览</el-button>
             </div>
-            <div>
-                。。。。。。。。。。等等功能
+            <div class="writearticle-time">
+                <el-date-picker
+                    v-model="publishTime"
+                    type="datetime"
+                    placeholder="选择日期时间">
+                </el-date-picker>
             </div>
             <div>
                 <el-button plain type="primary" size="small">发布</el-button>
@@ -15,6 +19,19 @@
     </el-collapse>
 </template>
 
-<style lang="less" scoped>
+<script>
 
+export default {
+    data() {
+        return {
+            publishTime: ''
+        }
+    }
+}
+</script>
+
+<style lang="less" scoped>
+.writearticle-time {
+    margin: 10px 0;
+}
 </style>

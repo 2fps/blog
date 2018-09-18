@@ -17,6 +17,8 @@
             </el-col>
             <el-col :span="8">
                 <publisharticle></publisharticle>
+                <classifymenu></classifymenu>
+                <tagmenu></tagmenu>
             </el-col>
         </el-row>
     </div>
@@ -25,6 +27,8 @@
 <script>
 import CheckUpdate from '../CheckUpdate'
 import PublishArticle from '../PublishArticle'
+import ClassifyMenu from '../ClassifyMenu'
+import TagMenu from '../TagMenu'
 import { quillEditor } from 'vue-quill-editor'
 
 export default {
@@ -38,6 +42,8 @@ export default {
     components: {
         'checkupdate': CheckUpdate,
         'publisharticle': PublishArticle,
+        'classifymenu': ClassifyMenu,
+        'tagmenu': TagMenu,
         quillEditor
     },
     methods: {
