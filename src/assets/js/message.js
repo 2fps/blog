@@ -9,9 +9,13 @@ let vue = new Vue(),
     }; 
 
 let showMessage = (type, msg) => {
+    // 有关键值，则使用，无则使用给定的提示
+    if (msgType.hasOwnProperty(msg)) {
+        msg = msgType[msg];
+    }
     vue.$message({
         showClose: true,
-        message: msgType[msg], //'添加成功',
+        message: msg, //'添加成功',
         type: type  // 'success'
     });
 };
