@@ -22,6 +22,7 @@
 <script>
 import CheckUpdate from '../CheckUpdate'
 import Table from '../Table'
+import msg from '../../assets/js/message'
 
 export default {
     data() {
@@ -62,7 +63,8 @@ export default {
             }).then((res) => {
                 if (0 !== res.data.code) {
                     // error
-                    alert(res.data.code);
+                    msg('error', 2);
+
                     return;
                 }
                 // 添加后重新获取数据
@@ -76,11 +78,7 @@ export default {
         },
         // 成功添加后的提示和数据处理
         finishAdd: function() {
-            this.$message({
-                showClose: true,
-                message: '添加成功',
-                type: 'success'
-            });
+            msg('success', 0);
             this.tagname = '';
         }
     },

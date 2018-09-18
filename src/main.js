@@ -18,11 +18,11 @@ Vue.use(ElementUI)
 Vue.use(VueQuillEditor)
 
 new Vue({
-  el: '#app',
-  router,
-  store,
-  template: '<App />',
-  render: h => h(App)
+    el: '#app',
+    router,
+    store,
+    template: '<App />',
+    render: h => h(App)
 })
 
 Vue.prototype.$http = axios

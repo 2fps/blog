@@ -60,7 +60,7 @@ router.post('/', (req, res) => {
         } else {
             // 提示已经存在了
             res.json({
-                code: -1
+                code: 2
             });
         }
 
