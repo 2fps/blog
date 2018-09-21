@@ -49,11 +49,7 @@ export default {
             var tName = this.tagname;
 
             if (0 === tName.length) {
-                this.$message({
-                    showClose: true,
-                    message: '请输入标签名',
-                    type: 'error'
-                });
+                msg('error', '请输入标签名');
 
                 return;
             }

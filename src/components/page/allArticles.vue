@@ -2,7 +2,7 @@
     <div class="allTags-box">
         <checkupdate></checkupdate>
         <h3>文章 &nbsp;<el-tag type="info" >写文章</el-tag></h3>
-        <div style="margin-top: 20px">
+        <div style="margin: 20px 0">
             <el-radio-group v-model="state" size="small">
                 <el-radio-button label="全部"></el-radio-button>
                 <el-radio-button label="已发布"></el-radio-button>
@@ -11,6 +11,9 @@
             </el-radio-group>
             <span>共11条</span>
         </div>
+        <el-row>
+            <el-button type="danger" plain @click.native="deleteChoose()">删除选中</el-button>
+        </el-row>
         <el-table
             class="tags-table"
             ref="tagTable"
@@ -18,13 +21,13 @@
             :data="alltags"
             tooltip-effect="dark"
             style="width: 100%"
-            @selection-change="handleSelectionChange">
+            @selection-change="selectionChange">
             <el-table-column
             type="selection"
             width="55">
             </el-table-column>
             <el-table-column
-            prop="title"
+            prop="name"
             label="标题">
             </el-table-column>
             <el-table-column
@@ -32,7 +35,7 @@
             label="作者">
             </el-table-column>
             <el-table-column
-            prop="catalog"
+            prop="catalogs"
             label="分类目录">
             </el-table-column>
             <el-table-column
@@ -40,7 +43,7 @@
             label="标签">
             </el-table-column>
             <el-table-column
-            prop="comment"
+            prop="comments"
             label="评论">
             </el-table-column>
             <el-table-column
@@ -70,14 +73,8 @@ export default {
     data() {
         return {
             dataInfo: [],
-            alltags: [{
-                title: 'HTML5',
-                author: 'zyt',
-                catalog: '前端',
-                tags: 'HTML5',
-                comment: 12,
-                date: '2018-09-03 22:23:09'
-            }],
+            alltags: [],
+            selectedArr: [],
             state: '全部'
         }
     },
@@ -94,11 +91,36 @@ export default {
             }
         },
         getDataInfo: function() {
-            this.$http.get('/api/articles');
+            this.$http.get('/api/articles').then((info) => {
+                this.alltags = info.data;
+            });
+        },
+        selectionChange: function(val) {
+            this.selectedArr = val;
+        },
+        deleteChoose: function() {
+            let ids = [];
+
+            this.selectedArr.forEach((val, ind) => {
+                ids.push(val._id)
+            });
+
+            // 参数是通过间隔,的方式区分的
+            this.$http.delete('/api/' + this.prefix + '?id=' + names.join(',')).then((res) => {
+                if (0 === res.data.code) {
+                    this.$message({
+                        showClose: true,
+                        message: '删除成功',
+                        type: 'success'
+                    });
+                    // 成功重新刷新
+                    this.getDataInfo();
+                }
+            });
         }
     },
     mounted() {
-        // this.getDataInfo();
+        this.getDataInfo();
     }
 }
 </script>

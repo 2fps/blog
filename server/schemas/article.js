@@ -5,6 +5,7 @@ let articleSchema = new mongoose.Schema({
     content: String,        // 文章内容
     tags: Array,            // 文章包含的tag
     catalogs: Array,        // 文章包含的catalog
+    author: String,         // 作者
     date: {
         type: Date,
         default: Date.now
