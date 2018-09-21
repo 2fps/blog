@@ -9,7 +9,7 @@
                 <el-radio-button label="草稿"></el-radio-button>
                 <el-radio-button label="待审"></el-radio-button>
             </el-radio-group>
-            <span>共11条</span>
+            <span>共{{ articleNum }}条</span>
         </div>
         <el-row>
             <el-button type="danger" plain @click.native="deleteChoose()">删除选中</el-button>
@@ -69,30 +69,34 @@
 <script>
 import CheckUpdate from '../CheckUpdate'
 
+let stateMap = {
+    '全部': -1,
+    '已发布': 0,
+    '草稿': 1,
+    '待审核': 2
+};
+
 export default {
     data() {
         return {
             dataInfo: [],
             alltags: [],
             selectedArr: [],
-            state: '全部'
+            state: '全部',
+            articleNum: 0
         }
     },
     components: {
         'checkupdate': CheckUpdate
     },
     methods: {
-        setPiece: function() {
-            for (let i = 5; i < 21; ++i) {
-                this.pieces.push({
-                    label: i,
-                    value: i
-                });
-            }
-        },
         getDataInfo: function() {
-            this.$http.get('/api/articles').then((info) => {
-                this.alltags = info.data;
+            let choose = stateMap[this.state],
+                params = choose > 0 ? '?state=' + choose : '';
+
+            this.$http.get('/api/articles' + params).then((info) => {
+                this.alltags = info.data.list;
+                this.articleNum = info.data.count;
             });
         },
         selectionChange: function(val) {
@@ -106,7 +110,7 @@ export default {
             });
 
             // 参数是通过间隔,的方式区分的
-            this.$http.delete('/api/' + this.prefix + '?id=' + names.join(',')).then((res) => {
+            this.$http.delete('/api/articles?id=' + ids.join(',')).then((res) => {
                 if (0 === res.data.code) {
                     this.$message({
                         showClose: true,

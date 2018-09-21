@@ -20,11 +20,22 @@ router.get('/', (req, res) => {
     }
 
     Article.find(filter).skip(from).limit(offset).exec(function(err, result) {
+        let data = {};
+
+        // 后面增加错误处理
         if (err) {
             return console.log(err);
         }
+        data.list = result;
 
-        res.json(result);
+        // 查询总的数量
+        Article.estimatedDocumentCount(filter, function(cErr, count) {
+            if (cErr) {
+                return console.log(cErr);
+            }
+            data.count = count;
+            res.json(data);
+        });
     });
 });
 
@@ -49,7 +60,29 @@ router.get('/length', (req, res) => {
 
 // 文章删除
 router.delete('/', (req, res) => {
+    let ids = req.query.id,
+        idArr = ids.split(','),     // 存放所有id
+        code = -1;
 
+    if (!idArr) {
+        return console.log('数据error');
+    }
+
+    // 开始去删除数据
+    Article.deleteMany({
+        _id: {
+            $in: idArr
+        }
+    }, function(err) {
+        if (err) {
+            code = 1;
+        } else {
+            code = 0;
+        }
+    });
+    res.json({
+        code: code
+    });
 });
 
 module.exports = router;
