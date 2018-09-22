@@ -79,9 +79,34 @@ router.delete('/', (req, res) => {
         } else {
             code = 0;
         }
+        res.json({
+            code: code
+        });
     });
-    res.json({
-        code: code
+});
+
+// 新增文章
+router.post('/', (req, res) => {
+    let params = req.body.data,
+        art = null;
+
+    art = new Article({
+        name: params.name,
+        content: params.content,
+        tags: params.tags,
+        catalogs: params.catalogs,
+        author: params.author,
+        date: params.date,
+        state: params.state
+    });
+
+    art.save(function(err) {
+        if (err) {
+            return console.log(err);
+        }
+        res.json({
+            code: 0
+        });
     });
 });
 

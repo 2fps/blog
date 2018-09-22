@@ -16,7 +16,7 @@
                 </quill-editor>
             </el-col>
             <el-col :span="8">
-                <publisharticle></publisharticle>
+                <publisharticle :saveArticle="saveArticle"></publisharticle>
                 <classifymenu></classifymenu>
                 <tagmenu></tagmenu>
             </el-col>
@@ -29,6 +29,7 @@ import CheckUpdate from '../CheckUpdate'
 import PublishArticle from '../PublishArticle'
 import ClassifyMenu from '../ClassifyMenu'
 import TagMenu from '../TagMenu'
+import msg from '../../assets/js/message'
 import { quillEditor } from 'vue-quill-editor'
 
 export default {
@@ -59,6 +60,24 @@ export default {
         onEditorChange({ editor, html, text }) {
             // console.log('editor change!', editor, html, text)
             this.content = html
+        },
+        // 给右侧点击发布按钮时的回调
+        saveArticle(date) {
+            var data = {};
+
+            data.name = this.siteName;
+            data.content = this.content;
+            data.tags = this.$store.state.writeArticle.tags;
+            data.catalogs = this.$store.state.writeArticle.catalogs;
+            data.author = '';
+            data.date = date;
+            data.state = 0;
+
+            this.$http.post('/api/articles', {data}).then(function(info) {
+                if (0 === info.data.code) {
+                    msg('success', 0);
+                }
+            });
         }
     },
     computed: {
@@ -78,8 +97,9 @@ export default {
         margin-bottom: 30px;
     }
     .quill-editor {
-        height: 300px;
+        height: 600px;
         max-height: 800px;
+        margin-bottom: 50px;
     }
 }
 </style>

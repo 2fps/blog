@@ -22,7 +22,10 @@ let articleSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    comments: Array,        // 文章评论
+    comments: {             // 文章评论
+        type: Array,
+        default: []
+    },
     state: 0                // 文章状态，0表示已发布，1表示草稿，2表示待审核
 });
 

@@ -1,7 +1,7 @@
 <template>
     <div class="allTags-box">
         <checkupdate></checkupdate>
-        <h3>文章 &nbsp;<el-tag type="info" >写文章</el-tag></h3>
+        <h3>文章 &nbsp;<el-tag class="jump-link" type="info" @click.native="writeNewArticle">写文章</el-tag></h3>
         <div style="margin: 20px 0">
             <el-radio-group v-model="state" size="small">
                 <el-radio-button label="全部"></el-radio-button>
@@ -68,6 +68,7 @@
 
 <script>
 import CheckUpdate from '../CheckUpdate'
+import msg from '../../assets/js/message'
 
 let stateMap = {
     '全部': -1,
@@ -112,15 +113,15 @@ export default {
             // 参数是通过间隔,的方式区分的
             this.$http.delete('/api/articles?id=' + ids.join(',')).then((res) => {
                 if (0 === res.data.code) {
-                    this.$message({
-                        showClose: true,
-                        message: '删除成功',
-                        type: 'success'
-                    });
+                    msg('success', 0);
                     // 成功重新刷新
                     this.getDataInfo();
                 }
             });
+        },
+        // 跳转到新增文章
+        writeNewArticle () {
+            this.$router.push('writeArticle');
         }
     },
     mounted() {
@@ -141,6 +142,9 @@ export default {
     }
     .tags-table {
         margin-top: 10px;
+    }
+    .jump-link {
+        cursor: pointer;
     }
 }
 </style>

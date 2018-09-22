@@ -6,12 +6,12 @@
             <div class="writearticle-time">
                 <el-autocomplete
                     class="inline-input"
-                    v-model="tags"
                     :fetch-suggestions="querySearch"
+                    v-model="chooseTags"
                     placeholder="请输入内容"
                     @select="handleSelect"
                 ></el-autocomplete>
-                <el-button type="primary" size="small">主要按钮</el-button>
+                <el-button type="primary" size="small">添加</el-button>
             </div>
             <div>
             </div>
@@ -23,19 +23,48 @@
 export default {
     data() {
         return {
-            tags: '',
-            querySearch: []
+            chooseTags: '',
+            tags: [],
+            activeNames: ['1']
         }
     },
-    method: {
-        handleSelect: function() {}
+    methods: {
+        handleSelect: function() {
+            this.$store.commit('setTags', this.chooseTags);
+        },
+        handleChange: function() {},
+        querySearch (queryString, cb) {
+            var tags = this.tags;
+            var results = queryString ? tags.filter(this.createFilter(queryString)) : tags;
+
+            // 调用 callback 返回建议列表的数据
+            cb(results);
+        },
+        createFilter(queryString) {
+            return (restaurant) => {
+                return (restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
+            };
+        },
+        getTags () {
+            return this.$http.get('/api/tags').then((info) => {
+                let tags = this.tags;
+
+                info.data.forEach(val => {
+                    tags.push({
+                        value: val.name
+                    })
+                });
+            });
+        }
+    },
+    mounted () {
+        this.getTags();
     }
 }
 </script>
 
 <style lang="less" scoped>
 .writearticle-time {
-    border: 1px solid #e0e0e0;
     margin: 10px 5px;
     padding: 5px;
     .check-type {

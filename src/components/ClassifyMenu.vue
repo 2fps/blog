@@ -1,13 +1,11 @@
 <template>
-    <el-collapse v-model="activeNames" @change="handleChange" activeNames="1">
+    <el-collapse v-model="activeNames" activeNames="1" class="cMenu-box">
         <el-collapse-item title="分类目录" name="1" class="collapse-content">
             <div>
             </div>
             <div class="writearticle-time">
-                <el-checkbox-group v-model="classList">
-                    <el-checkbox label="web1" class="check-type"></el-checkbox>
-                    <el-checkbox label="web2" class="check-type"></el-checkbox>
-                    <el-checkbox label="web3" class="check-type"></el-checkbox>
+                <el-checkbox-group v-model="classList" @change="handleChange">
+                    <el-checkbox v-for="(lab, index) in catalogs" :key="index" :label="lab.value" class="check-type"></el-checkbox>
                 </el-checkbox-group>
             </div>
             <div>
@@ -20,8 +18,24 @@
 export default {
     data() {
         return {
-            classList: []
+            classList: [],
+            activeNames: ['1'],
+            catalogs: []
         }
+    },
+    methods: {
+        handleChange: function() {
+            this.$store.commit('setCatalogs', this.classList);
+        }
+    },
+    mounted() {
+        this.$http.get('/api/catalogs').then((info) => {
+            info.data.forEach(val => {
+                this.catalogs.push({
+                    value: val.name
+                });
+            });
+        });
     }
 }
 </script>
@@ -36,5 +50,10 @@ export default {
     }
     
 }
-    
+.cMenu-box {
+    margin-bottom: 20px;
+}
+.el-checkbox {
+    margin-left: 20px;
+}
 </style>
