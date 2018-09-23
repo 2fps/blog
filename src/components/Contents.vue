@@ -7,7 +7,7 @@
             </h3>
             </div>
         </el-card>
-        <div v-for="da in articles" :id="da.id">
+        <div v-for="(da, index) in articles" :key="index">
             <contentlogo :article="da"></contentlogo>
         </div>
         <div class="content-pagination">
@@ -17,7 +17,7 @@
                 @current-change="currentChange"
                 :pager-count="5"
                 :page-size="5"
-                :total="100">
+                :total="articelLength">
             </el-pagination>
         </div>
     </div>
@@ -32,7 +32,8 @@ export default {
     },
     data() {
         return {
-            articles: []
+            articles: [],
+            articelLength: 0
         }
     },
     computed: {
@@ -48,7 +49,8 @@ export default {
             let me = this;
 
             this.$http.get('/api/articles').then(function(info) {
-                me.articles = info.data.articles;
+                me.articles = info.data.list;
+                me.articelLength = info.data.count;
             });
         }
     },

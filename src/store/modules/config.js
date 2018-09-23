@@ -13,14 +13,11 @@ const actions = {}
 
 //mutation
 const mutations = {
-    setName: function(state, name) {
-        state.name = name
-    },
-    setWords: function(state, words) {
-        state.words = words
-    },
-    setImgSrc: function(state, src) {
-        state.imgSrc = src
+    setWebsiteInfo: function(state, data) {
+        state.webName = data.webName
+        state.name = data.name
+        state.words = data.words
+        state.imgSrc = data.profileUrl
     }
 }
 

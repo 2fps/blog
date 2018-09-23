@@ -1,7 +1,7 @@
 let mongoose = require('mongoose');
 
 let websiteSchema = new mongoose.Schema({
-    name: String,           // 站点名称
+    webName: String,           // 站点名称
     subName: String,        // 副标题
     domain: String,         // 域名
     author: String,         // 作者名

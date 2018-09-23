@@ -6,20 +6,20 @@
   <el-card class="box-card" shadow="hover" :body-style="{ padding: '0px' }">
     <div style="padding: 14px;">
       <h1 class="content-title">
-        <router-link v-bind:to="'/article'">{{ article.title }}</router-link>
+        <router-link v-bind:to="'/article'" @click.native="bindData">{{ article.name }}</router-link>
       </h1>
       <div class="text item">
-          {{ article.summary }}
+          {{ article.content }}
       </div>
       <div class="bottom clearfix">
         <i class="fa fa-calendar"></i>
-        <span class="time">{{ article.releaseTime }}</span>&nbsp;
+        <span class="time">{{ article.date }}</span>&nbsp;
         <i class="fa fa-folder-open-o"></i>
-        <span class="time">{{ article.catalogs }}</span>&nbsp;
+        <span class="time">{{ article.catalogs.toString() }}</span>&nbsp;
         <i class="fa fa-commenting-o"></i>
-        <span class="time">{{ article.commentsNum }} Comment</span>&nbsp;
+        <span class="time">{{ article.commentNum }} Comment</span>&nbsp;
         <i class="fa fa-eye"></i>
-        <span class="time">{{ article.viewsNum }} Views</span>&nbsp;
+        <span class="time">{{ article.viewNum }} Views</span>&nbsp;
         <i class="fa fa-thumbs-o-up"></i>
         <span class="time">{{ article.likeNum }} Times</span>
       </div>
@@ -29,17 +29,25 @@
 
 <script>
 export default {
-    props: {
-        article: Object
-    },
+    props: ['article'],
     data() {
         return {
-            releaseTime: new Date(),
-            mainType: '前端开发',
-            commentNum: 2,
-            viewNum: 122,
-            likeNum: 9
+
         };
+    },
+    methods: {
+        bindData() {
+            this.$store.commit('setReadArticle', {
+                content: this.article.content,
+                name: this.article.name,
+                date: this.article.date,
+                catalog: this.article.catalogs.toString(),
+                commentNum: this.article.commentNum,
+                comments: [],
+                likeNum: this.article.likeNum,
+                viewNum: this.article.viewNum
+            })
+        }
     }
 }
 </script>

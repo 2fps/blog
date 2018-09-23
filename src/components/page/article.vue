@@ -1,20 +1,20 @@
 <template>
     <article class="article">
         <header>
-            <h1>1111111111111</h1>
+            <h1>{{ title }}</h1>
             <div>
                 <i class="fa fa-calendar"></i>
-                <span class="time">2018-09-23</span>&nbsp;
+                <span class="time">{{ date }}</span>&nbsp;
                 <i class="fa fa-commenting-o"></i>
-                <span class="time">111 Comment</span>&nbsp;
+                <span class="time">{{ commentNum }}</span>Comment&nbsp;
                 <i class="fa fa-eye"></i>
-                <span class="time">233 Views</span>&nbsp;
+                <span class="time">{{ viewNum }}</span>Views&nbsp;
                 <i class="fa fa-thumbs-o-up"></i>
-                <span class="time">324 Times</span>
+                <span class="time">{{ likeNum }}</span>Times
             </div>
         </header>
-        <div class="article-content">
-            <p>123</p>
+        <div class="article-content" v-html="content">
+            
         </div>
         <div class="article-pay">
             <i class="fa fa-usd"></i>
@@ -25,6 +25,36 @@
         </div>
     </article>
 </template>
+
+<script>
+export default {
+    data() {
+        return {
+            title: '',
+            content: '',
+            date: '',
+            commentNum: 0,
+            viewNum: 0,
+            likeNum: 0
+        }
+    },
+    methods: {
+        getNowReading() {
+            var data = this.$store.state.article.nowReading;
+
+            this.title = data.name;
+            this.date = data.date;
+            this.commentNum = data.commentNum;
+            this.content = data.content;
+            this.viewNum = data.viewNum;
+            this.likeNum = data.likeNum;
+        }
+    },
+    mounted: function() {
+        this.getNowReading();
+    }
+}
+</script>
 
 <style lang="less" scoped>
 .article {

@@ -17,9 +17,9 @@ export default {
         checkVersion () {
             let me = this;
 
-            this.$http.get('/version').then(function() {}, function() {
+/*             this.$http.get('/api/version').then(function() {}, function() {
                 me.newest = false;
-            })
+            }) */
         }
     },
     mounted() {

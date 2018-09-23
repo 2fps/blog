@@ -1,5 +1,5 @@
 <template>
     <div>
-        this is overview
+        欢迎来到首页，待开发。
     </div>
 </template>

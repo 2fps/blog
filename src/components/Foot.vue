@@ -12,7 +12,7 @@
                             <i class="fa fa-github fa-2x"></i>
                         </a>
                     </p>
-                    <p>Copyright 2016 - {{ nowYear }} <a class="footer-link" href="http://www.zhuyuntao.cn">前端驿站</a>. All Rights Reserved.<br><a class="footer-link" href="http://www.miitbeian.gov.cn/" rel="external nofollow" target="_blank">苏ICP备15040567号-1</a></p>
+                    <p>Copyright 2016 - {{ nowYear }} <a class="footer-link" href="http://www.zhuyuntao.cn">{{ webName }}</a>. All Rights Reserved.<br><a class="footer-link" href="http://www.miitbeian.gov.cn/" rel="external nofollow" target="_blank">苏ICP备15040567号-1</a></p>
                 </div>
             </div>
         </div>
@@ -24,6 +24,11 @@ export default {
     data() {
         return {
             nowYear: new Date().getFullYear()
+        }
+    },
+    computed: {
+        webName: function() {
+            return this.$store.state.config.webName;
         }
     }
 }

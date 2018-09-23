@@ -36,18 +36,35 @@ import DocClassify from '../DocClassify'
 import Foot from '../Foot'
 
 export default {
-  name: 'app',
-  components: {
-    'navbar': NavBar,
-    'contentlogo': ContentLogo,
-    'globalsearch': GlobalSearch,
-    'personintro': PersonIntro,
-    'tags': Tags,
-    'subjectcatalog': SubjectCatalog,
-    'docclassify': DocClassify,
-    'foot': Foot
-    // 'content': Content
-  }
+    name: 'app',
+    components: {
+        'navbar': NavBar,
+        'contentlogo': ContentLogo,
+        'globalsearch': GlobalSearch,
+        'personintro': PersonIntro,
+        'tags': Tags,
+        'subjectcatalog': SubjectCatalog,
+        'docclassify': DocClassify,
+        'foot': Foot
+        // 'content': Content
+    },
+    methods: {
+        getWebSiteInfo() {
+
+        }
+    },
+    mounted: function() {
+        this.$http.get('/api/website').then((info) => {
+            let config = info.data;
+
+            this.$store.commit('setWebsiteInfo', {
+                webName: config.webName,
+                name: config.author,
+                words: config.words,
+                profileUrl: config.profileUrl
+            })
+        });
+    }
 }
 </script>
 

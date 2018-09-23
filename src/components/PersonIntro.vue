@@ -29,20 +29,8 @@ export default {
         }
     },
     methods: {
-        getConfig() {
-            var me = this;
-
-            this.$http.get('/api/config').then(function (info) {
-                let config = info.data.config;
-
-                me.$store.commit('setName', config.name)
-                me.$store.commit('setWords', config.words)
-                me.$store.commit('setImgSrc', config.imgSrc)
-            });
-        }
     },
     mounted() {
-        this.getConfig();
     }
 }
 </script>
