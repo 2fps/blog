@@ -2,7 +2,7 @@
     <div class="tags-box">
         <h4 class="tags-title">标签</h4>
         <div class="tags-display">
-            <router-link v-bind:to="'/tags?key=' + tag.id"  class="tag-case" v-for="tag in tags" :key="tag.id" @click.native="tagDetail(tag.id)">{{ tag.name }}</router-link>
+            <router-link v-bind:to="'/tags?key=' + tag.name"  class="tag-case" v-for="tag in tags" :key="tag.id" @click.native="tagDetail(tag.name)">{{ tag.name }}</router-link>
         </div>
     </div>
 </template>
@@ -39,10 +39,12 @@ export default {
                 me.tags = arrayRandom(info.data);
             });
         },
-        tagDetail(id) {
+        // 通知主内容区数据变化
+        tagDetail(name) {
             this.$store.commit('setMode', {
+                main: 'tag',
                 mode: '标签目录',
-                modeContent: id
+                modeContent: name
             })
         }
     },

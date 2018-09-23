@@ -14,7 +14,7 @@
           <globalsearch></globalsearch>
           <tags></tags>
           <subjectcatalog></subjectcatalog>
-          <docclassify></docclassify>
+          <!-- <docclassify></docclassify> -->
         </el-col>
       </el-row>
       <el-footer height="180px">
@@ -61,7 +61,8 @@ export default {
                 webName: config.webName,
                 name: config.author,
                 words: config.words,
-                profileUrl: config.profileUrl
+                profileUrl: config.profileUrl,
+                numInpage: config.numInpage
             })
         });
     }

@@ -16,7 +16,7 @@
                 layout="prev, pager, next"
                 @current-change="currentChange"
                 :pager-count="5"
-                :page-size="5"
+                :page-size="pageSize"
                 :total="articelLength">
             </el-pagination>
         </div>
@@ -38,19 +38,33 @@ export default {
     },
     computed: {
         title: function() {
+            let params = '';
+
+            if ('tag' === this.$store.state.article.main) {
+                // 点击了详细标签，左侧显示对应的内容
+                params += '?tag=' + this.$store.state.article.modeContent;
+                getArticles(params);
+            }
+
+            debugger;
             return this.$store.state.article.mode + ':' + this.$store.state.article.modeContent;
+        },
+        pageSize: function() {
+            return this.$store.state.config.numInpage;
         }
     },
     methods: {
         currentChange() {
             alert();
         },
-        getArticles: function() {
-            let me = this;
+        // 默认获取所有按时间排序的文章
+        getArticles (params) {
+            // 处理下undefined等其他异常
+            params = params || '';
 
-            this.$http.get('/api/articles').then(function(info) {
-                me.articles = info.data.list;
-                me.articelLength = info.data.count;
+            this.$http.get('/api/articles' + params).then((info) => {
+                this.articles = info.data.list;
+                this.articelLength = info.data.count;
             });
         }
     },

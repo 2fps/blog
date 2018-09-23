@@ -10,7 +10,7 @@
         background-color="rgb(34, 34, 34)"
         text-color="rgba(255, 255, 255, 0.5)"
         active-text-color="#fff">
-        <el-menu-item index="1">
+        <!-- <el-menu-item index="1">
           <router-link to="/aboutMe">关于我</router-link>
         </el-menu-item>
         <el-submenu index="2">
@@ -27,7 +27,7 @@
           <router-link to="/download">
             <el-menu-item index="2-4">资源下载</el-menu-item>
           </router-link>
-        </el-submenu>
+        </el-submenu> -->
         <el-menu-item index="3">
           <router-link to="/index" @click.native="backToIndex()">主页</router-link>
         </el-menu-item>

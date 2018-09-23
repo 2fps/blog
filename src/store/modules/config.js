@@ -18,6 +18,7 @@ const mutations = {
         state.name = data.name
         state.words = data.words
         state.imgSrc = data.profileUrl
+        state.numInpage = data.numInpage
     }
 }
 
