@@ -2,6 +2,9 @@ let Article = require('../models/articleModel');
 let express = require('express');
 let router = express.Router();
 
+let tagDB = require('../dataDB/tagData');
+let catalogDB = require('../dataDB/catalogData');
+
 // 获取文章
 router.get('/', (req, res) => {
     let params = req.query,
@@ -99,6 +102,10 @@ router.post('/', (req, res) => {
         date: params.date,
         state: params.state
     });
+
+    // 新增文章的标签和分类需要加一处理
+    tagDB.addOne(params.tags);
+    catalogDB.addOne(params.catalogs);
 
     art.save(function(err) {
         if (err) {

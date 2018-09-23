@@ -3,13 +3,13 @@ module.exports = function(app){
     let website = require('../controllers/websiteController');
     let tags = require('../controllers/tagController');
     let catalogs = require('../controllers/catalogController');
-    let classify = require('../api/classify');
+    // let classify = require('../api/classify');
     let articles = require('../controllers/articleController');
 
     app.use('/api/website', website);
     app.use('/api/tags', tags);
     app.use('/api/catalogs', catalogs);
-    app.use('/api/classify', classify);
+    // app.use('/api/classify', classify);
     app.use('/api/articles', articles);
 };
 
