@@ -45,7 +45,7 @@ export default {
                 main: 'tag',
                 mode: '标签目录',
                 modeContent: name
-            })
+            });
         }
     },
     mounted() {

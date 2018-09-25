@@ -15,6 +15,7 @@
                 background
                 layout="prev, pager, next"
                 @current-change="currentChange"
+                :current-page="currentPage"
                 :pager-count="5"
                 :page-size="pageSize"
                 :total="articelLength">
@@ -33,7 +34,9 @@ export default {
     data() {
         return {
             articles: [],
-            articelLength: 0
+            articelLength: 0,
+            currentPage: 1,     // 当前第几页
+            from: 0             // 第一篇文章的开始位置
         }
     },
     computed: {
@@ -42,11 +45,15 @@ export default {
 
             if ('tag' === this.$store.state.article.main) {
                 // 点击了详细标签，左侧显示对应的内容
-                params += '?tag=' + this.$store.state.article.modeContent;
-                getArticles(params);
+                params += '?tags=' + this.$store.state.article.modeContent;
+            } else if ('catalog' === this.$store.state.article.main) {
+                params += '?catalogs=' + this.$store.state.article.modeContent;
+            } else if ('search' === this.$store.state.article.main) {
+                params += '?search=' + this.$store.state.article.modeContent;
             }
 
-            debugger;
+            this.getArticles(params);
+
             return this.$store.state.article.mode + ':' + this.$store.state.article.modeContent;
         },
         pageSize: function() {
@@ -54,8 +61,24 @@ export default {
         }
     },
     methods: {
-        currentChange() {
-            alert();
+        currentChange(curPage) {
+            this.currentPage = curPage;
+            var oParam = {
+                from: (this.currentPage - 1) * this.$store.state.config.numInpage,
+                offset: this.$store.state.config.numInpage
+            },
+                sParam = '?from=' + oParam.from + '&offset=' + oParam.offset;
+
+            if ('tag' === this.$store.state.article.main) {
+                // 点击了详细标签，左侧显示对应的内容
+                sParam += 'tags=' + this.$store.state.article.modeContent;
+            } else if ('catalog' === this.$store.state.article.main) {
+                sParam += 'catalogs=' + this.$store.state.article.modeContent;
+            } else if ('search' === this.$store.state.article.main) {
+                sParam += '?search=' + this.$store.state.article.modeContent;
+            }
+
+            this.getArticles(sParam);
         },
         // 默认获取所有按时间排序的文章
         getArticles (params) {

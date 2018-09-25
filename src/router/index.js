@@ -34,6 +34,9 @@ const routes = [{
     }, {
         path: '/classify',
         component: (resolve) => require(['../components/page/index.vue'], resolve)
+    }, {
+        path: '/search',
+        component: (resolve) => require(['../components/page/index.vue'], resolve)
     }]
 }, {
     path: '/login',

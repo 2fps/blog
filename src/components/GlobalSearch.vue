@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import msg from '../assets/js/message'
+
 export default {
     data() {
         return {
@@ -16,13 +18,15 @@ export default {
             let val = this.searchContent
 
             if (val) {
-                this.$router.push(val);
-            } else {
-                this.$message({
-                    showClose: true,
-                    message: '请输入需要搜索的内容',
-                    type: 'error'
+                this.$router.push('/search?key=' + val);
+                // 设置搜索配置
+                this.$store.commit('setMode', {
+                    main: 'search',
+                    mode: '搜索',
+                    modeContent: val
                 });
+            } else {
+                msg('error', 4);
             }
         }
     }

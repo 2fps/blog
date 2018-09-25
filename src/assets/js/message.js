@@ -5,7 +5,8 @@ let vue = new Vue(),
         0: '操作成功',
         1: '操作失败',
         2: '已经存在了',
-        3: '无此数据'
+        3: '无此数据',
+        4: '请输入需要搜索的内容'
     }; 
 
 let showMessage = (type, msg) => {
@@ -16,7 +17,7 @@ let showMessage = (type, msg) => {
     vue.$message({
         showClose: true,
         message: msg, //'添加成功',
-        type: type  // 'success'
+        type: type  // 'success' 'error'
     });
 };
 

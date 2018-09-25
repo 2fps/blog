@@ -2,9 +2,9 @@
     <div class="catalog-box">
         <h4 class="catalog-title">分类目录</h4>
         <div class="catalog-display">
-            <router-link class="catalog-item" v-bind:to="'/catalog?key=' + cata.id" v-for="cata in catalogs" :key="cata.id">
+            <router-link class="catalog-item" v-bind:to="'/catalog?key=' + cata.name" v-for="(cata, index) in catalogs" :key="index">
                 <i class="fa fa-folder-open-o"></i>
-                {{ cata.name + ' ( ' + cata.num + ' ) ' }}</router-link>
+                <span @click="changeCatalog(cata.name)">{{ cata.name + ' ( ' + cata.num + ' ) ' }}</span></router-link>
         </div>
 
     </div>
@@ -18,11 +18,16 @@ export default {
         }
     },
     methods: {
-        getCatalog: function() {
-            let me = this;
-
-            this.$http.get('/api/catalogs').then(function(info) {
-                me.catalogs = info.data;
+        getCatalog () {
+            this.$http.get('/api/catalogs').then((info) => {
+                this.catalogs = info.data;
+            });
+        },
+        changeCatalog(name) {
+            this.$store.commit('setMode', {
+                main: 'catalog',
+                mode: '分类目录',
+                modeContent: name
             });
         }
     },

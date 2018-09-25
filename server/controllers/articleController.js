@@ -22,6 +22,21 @@ router.get('/', (req, res) => {
         filter.state = params.state;
     }
 
+    // tags搜索
+    if (params.hasOwnProperty('tags')) {
+        filter.tags = params.tags;
+    }
+
+    // catalog搜索
+    if (params.hasOwnProperty('catalogs')) {
+        filter.catalogs = params.catalogs;
+    }
+
+    // 全局搜索，模糊匹配字符串
+    if (params.hasOwnProperty('search')) {
+        filter.name = new RegExp(params.search);
+    }
+
     Article.find(filter).skip(from).limit(offset).exec(function(err, result) {
         let data = {};
 
@@ -32,7 +47,7 @@ router.get('/', (req, res) => {
         data.list = result;
 
         // 查询总的数量
-        Article.estimatedDocumentCount(filter, function(cErr, count) {
+        Article.countDocuments(filter, function(cErr, count) {
             if (cErr) {
                 return console.log(cErr);
             }
