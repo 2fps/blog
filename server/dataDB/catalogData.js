@@ -19,3 +19,19 @@ exports.addOne = function(names) {
         }
     })
 };
+
+exports.reduceOne = (names) => {
+    Catalog.update({
+        name: {
+            $in: names
+        }
+    }, {
+        $inc: {
+            num: -1
+        }
+    }, function(err) {
+        if (err) {
+            return console.log(err);
+        }
+    });
+};

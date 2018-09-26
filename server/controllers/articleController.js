@@ -57,25 +57,6 @@ router.get('/', (req, res) => {
     });
 });
 
-// 获取对应条件下的文章数量
-router.get('/length', (req, res) => {
-    let filter = {};
-
-    if (params.hasOwnProperty('state')) {
-        filter.state = params.state;
-    }
-
-    Article.estimatedDocumentCount(filter, (err, count) => {
-        if (err) {
-            return console.log(err);
-        }
-
-        res.json({
-            count: count
-        });
-    })
-});
-
 // 文章删除
 router.delete('/', (req, res) => {
     let ids = req.query.id,
@@ -85,22 +66,49 @@ router.delete('/', (req, res) => {
     if (!idArr) {
         return console.log('数据error');
     }
-
-    // 开始去删除数据
-    Article.deleteMany({
+    // 匹配数据库中的数据再做其他处理
+    Article.find({
         _id: {
             $in: idArr
         }
-    }, function(err) {
+    }, function(err, docs) {
         if (err) {
-            code = 1;
-        } else {
-            code = 0;
+            return res.json({
+                code: 1
+            });
         }
-        res.json({
-            code: code
+        // 删除对应的tag和catalog中的记录
+        if (docs.length) {
+            docs.forEach(function(val, ind) {
+                tagDB.reduceOne(val.tags);
+                // 
+                val.catalogs.forEach(function(value) {
+                    catalogDB.reduceOne(value);
+                });
+            });
+        }
+
+
+        // 开始去删除数据
+        Article.deleteMany({
+            _id: {
+                $in: idArr
+            }
+        }, function(err) {
+            if (err) {
+                code = 1;
+            } else {
+                code = 0;
+                // 删除后更改tag和catalog中的数据
+                // tagDB.reduceOne(params.tags);
+            }
+            res.json({
+                code: code
+            });
         });
     });
+
+
 });
 
 // 新增文章
@@ -120,7 +128,10 @@ router.post('/', (req, res) => {
 
     // 新增文章的标签和分类需要加一处理
     tagDB.addOne(params.tags);
-    catalogDB.addOne(params.catalogs);
+
+    params.catalogs.forEach(function(val) {
+        catalogDB.addOne(val);
+    });
 
     art.save(function(err) {
         if (err) {
