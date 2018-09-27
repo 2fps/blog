@@ -12,4 +12,4 @@ let userSchema = new mongoose.Schema({
     versionKey: false
 });
 
-module.exports = module;
+module.exports = userSchema;

@@ -9,7 +9,7 @@
                     <el-input type="password" v-model="logForm.password" auto-complete="off"></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="submitForm('logForm')">提交</el-button>
+                    <el-button type="primary" @click="login('logForm')">提交</el-button>
                 </el-form-item>
             </el-form>
         </div>
@@ -17,7 +17,9 @@
 </template>
 
 <script>
-  export default {
+import msg from '../../assets/js/message';
+
+export default {
     data() {
         let validUser = (rule, value, callback) => {
             if ('' === value) {
@@ -47,16 +49,25 @@
         };
     },
     methods: {
-        submitForm(formName) {
-            this.$router.push('overview');
-/*             this.$refs[formName].validate((valid) => {
-                if (valid) {
-                    alert('submit!');
+        // 登录接口
+        login(formName) {
+            let username = this.logForm.username,
+                password = this.logForm.password;
+
+            this.$http.post('/api/user', {
+                username: username,
+                password, password
+            }).then((info) => {
+                let code = info.data.code;
+
+                if (6 === code) {
+                    // 登录成功
+                    msg('success', 6);
+                    this.$router.push('/overview');
                 } else {
-                    console.log('error submit!!');
-                    return false;
+                    msg('error', 5);
                 }
-            }); */
+            });
         }
     }
   }
