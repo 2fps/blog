@@ -6,10 +6,10 @@
   <el-card class="box-card" shadow="hover" :body-style="{ padding: '0px' }">
     <div style="padding: 14px;">
       <h1 class="content-title">
-        <router-link v-bind:to="'/article'" @click.native="bindData">{{ article.name }}</router-link>
+        <router-link v-bind:to="'/article'" @click.native="bindData">{{ article.title }}</router-link>
       </h1>
       <div class="text item">
-          {{ article.content }}
+          {{ article.subTitle }}
       </div>
       <div class="bottom clearfix">
         <i class="fa fa-calendar"></i>
@@ -39,7 +39,8 @@ export default {
         bindData() {
             this.$store.commit('setReadArticle', {
                 content: this.article.content,
-                name: this.article.name,
+                title: this.article.title,
+                subTitle: this.article.subTitle,
                 date: this.article.date,
                 catalog: this.article.catalogs.toString(),
                 commentNum: this.article.commentNum,

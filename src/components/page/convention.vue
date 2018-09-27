@@ -53,7 +53,7 @@ export default {
             this.$http.get('/api/website').then((info) => {
                 let webInfo = info.data;
 
-                this.siteName = webInfo.name;
+                this.siteName = webInfo.webName;
                 this.subTitle = webInfo.subName;
                 this.blogAddress = webInfo.domain;
             });

@@ -34,7 +34,7 @@ router.get('/', (req, res) => {
 
     // 全局搜索，模糊匹配字符串
     if (params.hasOwnProperty('search')) {
-        filter.name = new RegExp(params.search);
+        filter.title = new RegExp(params.search);
     }
 
     Article.find(filter).skip(from).limit(offset).exec(function(err, result) {
@@ -114,10 +114,14 @@ router.delete('/', (req, res) => {
 // 新增文章
 router.post('/', (req, res) => {
     let params = req.body.data,
-        art = null;
+        art = null,
+        subTitle = '';      // 用于缩略图时显示简单内容的
+
+    subTitle = getAssignContent(params.content, 150);
 
     art = new Article({
-        name: params.name,
+        title: params.title,
+        subTitle: subTitle,
         content: params.content,
         tags: params.tags,
         catalogs: params.catalogs,
@@ -144,3 +148,14 @@ router.post('/', (req, res) => {
 });
 
 module.exports = router;
+
+/**
+ * 获取指定字符串len长度，并截取掉元素标签
+ * @param {String} str 字符串
+ * @param {Number} len 长度
+ */
+function getAssignContent(str, len) {
+    str = str.substr(0, len);
+
+    return str.replace(/<[^>]+>/g, '');
+}

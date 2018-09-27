@@ -2,7 +2,7 @@
     <el-collapse v-model="activeNames" @change="handleChange" activeNames="1" class="pbArticle-box">
         <el-collapse-item title="发布" name="1" class="collapse-content">
             <div>
-                <el-button plain size="small">保存草稿</el-button>
+                <el-button plain size="small" disabled="">保存草稿</el-button>
                 <el-button plain size="small" disabled="">预览</el-button>
             </div>
             <div class="writearticle-time">

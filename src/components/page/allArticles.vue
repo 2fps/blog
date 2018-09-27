@@ -5,10 +5,10 @@
         <div style="margin: 20px 0">
             <el-radio-group v-model="state" size="small">
                 <el-radio-button label="全部"></el-radio-button>
-                <el-radio-button label="已发布"></el-radio-button>
-                <el-radio-button label="草稿"></el-radio-button>
-                <el-radio-button label="待审"></el-radio-button>
-            </el-radio-group>
+                <el-radio-button disabled="" label="已发布"></el-radio-button>
+                <el-radio-button disabled="" label="草稿"></el-radio-button>
+                <el-radio-button disabled="" label="待审"></el-radio-button>
+            </el-radio-group> 
             <span>共{{ articleNum }}条</span>
         </div>
         <el-row>
@@ -27,7 +27,7 @@
             width="55">
             </el-table-column>
             <el-table-column
-            prop="name"
+            prop="title"
             label="标题">
             </el-table-column>
             <el-table-column
@@ -52,14 +52,14 @@
             </el-table-column>
             <el-table-column label="操作">
                 <template slot-scope="scope">
-                    <el-button
+                    <!-- <el-button
                     size="mini"
                     type="success"
-                    @click="deleteInfo(scope.$index, scope.row)">查看</el-button>
+                    @click="deleteInfo(scope.$index, scope.row)">查看</el-button> -->
                     <el-button
                     size="mini"
                     type="warning"
-                    @click="deleteInfo(scope.$index, scope.row)">编辑</el-button>
+                    @click="modifyArticle(scope.$index, scope.row)">编辑</el-button>
             </template>
             </el-table-column>
         </el-table>
@@ -122,6 +122,12 @@ export default {
         // 跳转到新增文章
         writeNewArticle () {
             this.$router.push('writeArticle');
+        },
+        // 修改已经生成的文章
+        modifyArticle() {
+            // 路由跳转
+            this.$router.push('/writeArticle');
+            // 设置默认显示的内容
         }
     },
     mounted() {

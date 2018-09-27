@@ -65,7 +65,7 @@ export default {
         saveArticle(date) {
             var data = {};
 
-            data.name = this.siteName;
+            data.title = this.siteName;
             data.content = this.content;
             data.tags = this.$store.state.writeArticle.tags;
             data.catalogs = this.$store.state.writeArticle.catalogs;

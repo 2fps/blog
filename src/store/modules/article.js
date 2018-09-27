@@ -7,7 +7,8 @@ const state = {
     modeContent: '',    // 模式下对应的内容，受mode控制
     nowReading: {       // 查看文章时，对应的详细信息
         content: '',
-        name: '',
+        title: '',
+        subTitle: '',
         date: '',
         catalog: '',
         commentNum: 0,

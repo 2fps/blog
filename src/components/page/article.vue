@@ -42,7 +42,7 @@ export default {
         getNowReading() {
             var data = this.$store.state.article.nowReading;
 
-            this.title = data.name;
+            this.title = data.title;
             this.date = data.date;
             this.commentNum = data.commentNum;
             this.content = data.content;
