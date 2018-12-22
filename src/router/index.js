@@ -7,8 +7,8 @@ const routes = [{
     path: '/',
     redirect: '/index'
 }, {
-    path: '/frontend',
-    component: (resolve) => require(['../components/page/frontend.vue'], resolve),
+    path: '/index',
+    component: (resolve) => require(['../pages/index.vue'], resolve),
     children: [{
         path: '/index',     // 默认主页
         name: 'index',

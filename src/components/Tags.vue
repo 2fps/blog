@@ -22,7 +22,7 @@ export default {
             var me = this;
 
             this.$http.get('/api/tags').then(function (info) {
-                let tags = info.data;
+                let tags = info.data.data;
                 // 检查有无数据
                 if (0 === tags.length) {
                     // 没有数据
@@ -30,18 +30,22 @@ export default {
                 }
                 // 过滤tag内容为0的
                 tags = tags.filter(function(val) {
-                    if (val.number > 0) {
+                    if (val.nums > 0) {
                         return true;
                     }
                 });
 
                 // 将tags乱序显示
-                me.tags = arrayRandom(info.data);
+                me.tags = arrayRandom(tags);
             });
         },
         // 通知主内容区数据变化
         tagDetail(name) {
             this.$store.commit('setMode', {
+	  "id": 123,  // id号,大于0
+      "name": "显示名称",
+	  "alias": "别名",
+	  "nums": "该名称共计数量",
                 main: 'tag',
                 mode: '标签目录',
                 modeContent: name

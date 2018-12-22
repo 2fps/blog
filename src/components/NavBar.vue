@@ -10,10 +10,7 @@
         background-color="rgb(34, 34, 34)"
         text-color="rgba(255, 255, 255, 0.5)"
         active-text-color="#fff">
-        <!-- <el-menu-item index="1">
-          <router-link to="/aboutMe">关于我</router-link>
-        </el-menu-item>
-        <el-submenu index="2">
+        <el-submenu index="1">
           <template slot="title">我的</template>
           <router-link to="/CSS">
             <el-menu-item index="2-1">CSS</el-menu-item>
@@ -27,13 +24,16 @@
           <router-link to="/download">
             <el-menu-item index="2-4">资源下载</el-menu-item>
           </router-link>
-        </el-submenu> -->
-        <el-menu-item index="3">
+        </el-submenu>
+        <el-menu-item index="2">
           <router-link to="/index" @click.native="backToIndex()">主页</router-link>
         </el-menu-item>
-        <el-menu-item index="4"><a target="_blank">
+        <el-menu-item index="3"><a target="_blank">
           <router-link to="/login">管理</router-link>
         </a></el-menu-item>
+        <el-menu-item index="4">
+          <router-link to="/aboutMe">关于我</router-link>
+        </el-menu-item>
     </el-menu>
 </template>
 

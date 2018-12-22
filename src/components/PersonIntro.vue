@@ -1,9 +1,13 @@
 <template>
+    <!-- 个人简介 -->
     <aside class="person-introduction clearfix">
         <div class="photo-wrapper">
+            <!-- 图片 -->
             <img class="about-photo" :src="myImgSrc">
         </div>
+        <!-- 个人名称 -->
         <h4 class="person-title">{{ myName }}</h4>
+        <!-- 一句话 -->
         <div class="person-content">
             <p>{{ myWords }}</p>
         </div>
