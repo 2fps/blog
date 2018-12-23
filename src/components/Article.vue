@@ -4,17 +4,17 @@
             <h1>{{ title }}</h1>
             <div>
                 <i class="fa fa-calendar"></i>
-                <span class="time">{{ date }}</span>&nbsp;
+                <span class="time">{{ publishTime }}</span>&nbsp;
                 <i class="fa fa-commenting-o"></i>
-                <span class="time">{{ commentNum }}</span>Comment&nbsp;
+                <span class="time">{{ commentNums }}</span>Comment&nbsp;
                 <i class="fa fa-eye"></i>
-                <span class="time">{{ viewNum }}</span>Views&nbsp;
+                <span class="time">{{ readNums }}</span>Views&nbsp;
                 <i class="fa fa-thumbs-o-up"></i>
-                <span class="time">{{ likeNum }}</span>Times
+                <span class="time">{{ likeNums }}</span>Times
             </div>
         </header>
-        <div class="article-content" v-html="content">
-            
+        <div class="article-content">
+            {{ contents }}
         </div>
         <div class="article-pay">
             <i class="fa fa-usd"></i>
@@ -31,28 +31,32 @@ export default {
     data() {
         return {
             title: '',
-            content: '',
-            date: '',
-            commentNum: 0,
-            viewNum: 0,
-            likeNum: 0
+            contents: '',
+            publishTime: '',
+            commentNums: 0,
+            readNums: 0,
+            likeNums: 0
         }
     },
     methods: {
-        getNowReading() {
-            var data = this.$store.state.article.nowReading;
+        getArticleContent(articleId) {
+            let params = 'articleId=' + articleId;
 
-            this.title = data.title;
-            this.date = data.date;
-            this.commentNum = data.commentNum;
-            this.content = data.content;
-            this.viewNum = data.viewNum;
-            this.likeNum = data.likeNum;
+            this.$http.get('/api/articles?' + params).then((info) => {
+                this.contents = info.data.data.contents;
+                this.title = info.data.data.title;
+                this.publishTime = info.data.data.publishTime;
+                this.commentNums = info.data.data.commentNums;
+                this.readNums = info.data.data.readNums;
+                this.likeNums = info.data.data.likeNums;
+            });
         }
     },
-    mounted: function() {
-        this.getNowReading();
-    }
+    mounted() {
+        var articleId = this.$route.params.articleId;
+        // 获取文章的详细信息
+        this.getArticleContent(articleId);
+    },
 }
 </script>
 

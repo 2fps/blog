@@ -10,6 +10,7 @@
         background-color="rgb(34, 34, 34)"
         text-color="rgba(255, 255, 255, 0.5)"
         active-text-color="#fff">
+        <a :href="siteUrl" class="web-site">{{ siteName }}</a>
         <el-submenu index="1">
           <template slot="title">我的</template>
           <router-link to="/CSS">
@@ -54,11 +55,29 @@ export default {
                 modeContent: ''
             })
         }
+    },
+    computed: {
+        siteName: function() {
+          return this.$store.state.config.siteName;
+        },
+        siteUrl: function() {
+          return this.$store.state.config.siteUrl;
+        }
     }
 }
 </script>
 
 <style scoped lang="less">
+.web-site {
+  float: left;
+  color: #fff;
+  height: 60px;
+  line-height: 60px;
+  cursor: pointer;
+  margin-right: 100px;
+  font-size: 24px;
+  letter-spacing: 2px;
+}
 .el-menu {
   max-width: 1080px;
   margin: 0 auto;

@@ -2,7 +2,7 @@
     <div class="catalog-box">
         <h4 class="catalog-title">分类目录</h4>
         <div class="catalog-display">
-            <router-link class="catalog-item" v-bind:to="'/catalog?key=' + cata.name" v-for="(cata, index) in catalogs" :key="index">
+            <router-link class="catalog-item" v-bind:to="'/index?catalog=' + cata.name" v-for="(cata, index) in catalogs" :key="index">
                 <i class="fa fa-folder-open-o"></i>
                 <span @click="changeCatalog(cata.name)">{{ cata.name + ' ( ' + cata.nums + ' ) ' }}</span></router-link>
         </div>

@@ -18,7 +18,7 @@ export default {
             let val = this.searchContent
 
             if (val) {
-                this.$router.push('/search?key=' + val);
+                this.$router.push('/index?search=' + val);
                 // 设置搜索配置
                 this.$store.commit('setMode', {
                     mode: 'search',

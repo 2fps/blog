@@ -2,7 +2,7 @@
     <div class="tags-box">
         <h4 class="tags-title">标签</h4>
         <div class="tags-display">
-            <router-link v-bind:to="'/tags?key=' + tag.name"  class="tag-case" v-for="tag in tags" :key="tag.id" @click.native="tagDetail(tag.name)">{{ tag.name }}</router-link>
+            <router-link v-bind:to="'/index?tags=' + tag.name"  class="tag-case" v-for="tag in tags" :key="tag.id" @click.native="tagDetail(tag.name)">{{ tag.name }}</router-link>
         </div>
     </div>
 </template>

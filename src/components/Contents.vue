@@ -25,7 +25,13 @@
 </template>
 
 <script>
-import ContentLogo from './ContentLogo'
+import ContentLogo from './ContentLogo';
+
+const queryTrans = {
+    tags: '标签目录',
+    catalog: '分类目录',
+    search: '搜索'
+};
 
 export default {
     components: {
@@ -35,60 +41,77 @@ export default {
         return {
             articles: [],
             articelLength: 0,
+            mode: '',
+            modeCon: '',
             currentPage: 1,     // 当前第几页
             from: 0             // 第一篇文章的开始位置
         }
     },
     computed: {
-        title: function() {
-            let params = '';
-
-            if ('tag' === this.$store.state.article.main) {
-                // 点击了详细标签，左侧显示对应的内容
-                params += '?tags=' + this.$store.state.article.modeContent;
-            } else if ('catalog' === this.$store.state.article.main) {
-                params += '?catalogs=' + this.$store.state.article.modeContent;
-            } else if ('search' === this.$store.state.article.main) {
-                params += '?search=' + this.$store.state.article.modeContent;
-            }
-
-            this.getArticles(params);
-
-            return this.$store.state.config.modeDes + ':' + this.$store.state.config.con;
+        // 顶部提示
+        title: function() { 
+            return queryTrans[this.mode] + ':' + this.modeCon;
         },
         pageSize: function() {
             return this.$store.state.config.numInpage;
         }
     },
+    watch: {
+        $route(to, from ){
+            let query = to.query;
+
+            // 
+            let queryName = Object.keys(query)[0];
+
+            // switch
+            this.mode = queryName;
+            this.modeCon = query[queryName];
+
+            // 重新开始查询
+            this.getArticles();
+        }
+    },
     methods: {
         currentChange(curPage) {
-            this.currentPage = curPage;
+            if (curPage) {
+                this.currentPage = curPage;
+            }
+
+            this.getArticles();
+        },
+        // 默认获取所有按时间排序的文章
+        getArticles () {
+            // 获取查询参数
+            let params = this.combineQuery();
+
+            this.$http.get('/api/articles' + params).then((info) => {
+                this.articles = info.data.data.sort(function(ar1, ar2) {
+                    if (ar1.articleId > ar2.articleId) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                });
+                this.articelLength = info.data.data.length;
+            });
+        },
+        combineQuery() {
             var oParam = {
                 from: (this.currentPage - 1) * this.$store.state.config.numInpage,
                 offset: this.$store.state.config.numInpage
             },
-                sParam = '?from=' + oParam.from + '&offset=' + oParam.offset;
+                sParam = '?from=' + oParam.from + '&end=' + (oParam.from + oParam.offset);
 
-            if ('tag' === this.$store.state.article.main) {
+            if ('tag' === this.mode) {
                 // 点击了详细标签，左侧显示对应的内容
-                sParam += 'tags=' + this.$store.state.article.modeContent;
-            } else if ('catalog' === this.$store.state.article.main) {
-                sParam += 'catalogs=' + this.$store.state.article.modeContent;
-            } else if ('search' === this.$store.state.article.main) {
-                sParam += '?search=' + this.$store.state.article.modeContent;
+                sParam += 'tags=' + this.modeCon;
+            } else if ('catalog' === this.mode) {
+                sParam += 'catalogs=' + this.modeCon;
+            } else if ('search' === this.mode) {
+                sParam += '?search=' + this.modeCon;
             }
 
-            this.getArticles(sParam);
-        },
-        // 默认获取所有按时间排序的文章
-        getArticles (params) {
-            // 处理下undefined等其他异常
-            params = params || '';
-
-            this.$http.get('/api/articles' + params).then((info) => {
-                this.articles = info.data.data;
-                this.articelLength = info.data.data.count;
-            });
+            return sParam;
         }
     },
     mounted() {

@@ -18,14 +18,14 @@ const routes = [{
         name: 'index',
         component: (resolve) => require(['../components/page/aboutMe.vue'], resolve)
     }, {
-        path: '/article',   // 文章详细内容
+        path: '/article/:articleId',   // 文章详细内容，articleId是文章id号，用于查询详细的文章内容
         name: 'index',
-        component: (resolve) => require(['../components/page/article.vue'], resolve)
+        component: (resolve) => require(['../components/Article.vue'], resolve)
     }, {
         path: '/html5',   // 文章详细内容
         name: 'index',
-        component: (resolve) => require(['../components/page/article.vue'], resolve)
-    }, {
+        component: (resolve) => require(['../components/Article.vue'], resolve)
+    }/* , {
         path: '/tags',
         component: (resolve) => require(['../pages/indexArticles.vue'], resolve)
     }, {
@@ -37,7 +37,7 @@ const routes = [{
     }, {
         path: '/search',
         component: (resolve) => require(['../pages/indexArticles.vue'], resolve)
-    }]
+    } */]
 }, {
     path: '/login',
     component: (resolve) => require(['../components/page/login.vue'], resolve)
