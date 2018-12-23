@@ -4,7 +4,7 @@
         <div class="catalog-display">
             <router-link class="catalog-item" v-bind:to="'/catalog?key=' + cata.name" v-for="(cata, index) in catalogs" :key="index">
                 <i class="fa fa-folder-open-o"></i>
-                <span @click="changeCatalog(cata.name)">{{ cata.name + ' ( ' + cata.num + ' ) ' }}</span></router-link>
+                <span @click="changeCatalog(cata.name)">{{ cata.name + ' ( ' + cata.nums + ' ) ' }}</span></router-link>
         </div>
 
     </div>
@@ -20,7 +20,7 @@ export default {
     methods: {
         getCatalog () {
             this.$http.get('/api/catalogs').then((info) => {
-                this.catalogs = info.data;
+                this.catalogs = info.data.data;
             });
         },
         changeCatalog(name) {

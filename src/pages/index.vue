@@ -55,7 +55,7 @@ export default {
     },
     mounted: function() {
         this.$http.get('/api/website').then((info) => {
-            let config = info.data;
+            let config = info.data.data;
 
             this.$store.commit('setWebsiteInfo', {
                 siteName: config.siteName,

@@ -9,19 +9,19 @@
         <router-link v-bind:to="'/article'" @click.native="bindData">{{ article.title }}</router-link>
       </h1>
       <div class="text item">
-          {{ article.subTitle }}
+          {{ article.brief }}
       </div>
       <div class="bottom clearfix">
         <i class="fa fa-calendar"></i>
-        <span class="time">{{ article.date }}</span>&nbsp;
+        <span class="time">{{ article.publishTime }}</span>&nbsp;
         <i class="fa fa-folder-open-o"></i>
-        <span class="time">{{ article.catalogs.toString() }}</span>&nbsp;
+        <span class="time">{{ article.classifyName.toString() }}</span>&nbsp;
         <i class="fa fa-commenting-o"></i>
-        <span class="time">{{ article.commentNum }} Comment</span>&nbsp;
+        <span class="time">{{ article.commentNums }} Comment</span>&nbsp;
         <i class="fa fa-eye"></i>
-        <span class="time">{{ article.viewNum }} Views</span>&nbsp;
+        <span class="time">{{ article.readNums }} Views</span>&nbsp;
         <i class="fa fa-thumbs-o-up"></i>
-        <span class="time">{{ article.likeNum }} Times</span>
+        <span class="time">{{ article.likeNums }} Times</span>
       </div>
     </div>
   </el-card>

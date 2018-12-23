@@ -23,13 +23,13 @@ export default {
     },
     computed: {
         myName: function() {
-            return this.$store.state.config.name
+            return this.$store.state.config.name;
         },
         myWords: function() {
-            return this.$store.state.config.words
+            return this.$store.state.config.words;
         },
         myImgSrc: function() {
-            return this.$store.state.config.imgSrc
+            return this.$store.state.config.imgSrc;
         }
     },
     methods: {

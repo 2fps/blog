@@ -21,6 +21,11 @@ export default {
         getTags() {
             var me = this;
 
+            if (this.$store.state.config.tags.length) {
+                // 有数据不需要查询
+                return;
+            }
+
             this.$http.get('/api/tags').then(function (info) {
                 let tags = info.data.data;
                 // 检查有无数据
@@ -42,13 +47,8 @@ export default {
         // 通知主内容区数据变化
         tagDetail(name) {
             this.$store.commit('setMode', {
-	  "id": 123,  // id号,大于0
-      "name": "显示名称",
-	  "alias": "别名",
-	  "nums": "该名称共计数量",
-                main: 'tag',
-                mode: '标签目录',
-                modeContent: name
+                mode: 'tags',
+                modeDes: '标签目录'
             });
         }
     },

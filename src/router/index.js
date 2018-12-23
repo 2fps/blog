@@ -1,5 +1,5 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 
 Vue.use(VueRouter)
 
@@ -12,7 +12,7 @@ const routes = [{
     children: [{
         path: '/index',     // 默认主页
         name: 'index',
-        component: (resolve) => require(['../components/page/index.vue'], resolve)
+        component: (resolve) => require(['../pages/indexArticles.vue'], resolve)
     }, {
         path: '/aboutMe',   // 关于我
         name: 'index',
@@ -27,16 +27,16 @@ const routes = [{
         component: (resolve) => require(['../components/page/article.vue'], resolve)
     }, {
         path: '/tags',
-        component: (resolve) => require(['../components/page/index.vue'], resolve)
+        component: (resolve) => require(['../pages/indexArticles.vue'], resolve)
     }, {
         path: '/catalog',
-        component: (resolve) => require(['../components/page/index.vue'], resolve)
+        component: (resolve) => require(['../pages/indexArticles.vue'], resolve)
     }, {
         path: '/classify',
-        component: (resolve) => require(['../components/page/index.vue'], resolve)
+        component: (resolve) => require(['../pages/indexArticles.vue'], resolve)
     }, {
         path: '/search',
-        component: (resolve) => require(['../components/page/index.vue'], resolve)
+        component: (resolve) => require(['../pages/indexArticles.vue'], resolve)
     }]
 }, {
     path: '/login',

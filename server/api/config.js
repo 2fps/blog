@@ -4,8 +4,8 @@ let Mock = require('mockjs');
 
 // 获取个人配置信息
 router.get('/', (req, res) => {
-    var data = Mock.mock({
-        'config': {
+    var data = {
+        data: {
             "siteName": "前端驿站",
             "subTitle": "我是副标题",
             "siteUrl": "http://127.0.0.1:8082/",
@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
             "CDNPath": "",
             "webRecord": "123456789"
         }
-    });
+    };
     res.send(JSON.stringify(data));
 });
 

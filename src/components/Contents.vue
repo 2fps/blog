@@ -54,7 +54,7 @@ export default {
 
             this.getArticles(params);
 
-            return this.$store.state.article.mode + ':' + this.$store.state.article.modeContent;
+            return this.$store.state.config.modeDes + ':' + this.$store.state.config.con;
         },
         pageSize: function() {
             return this.$store.state.config.numInpage;
@@ -86,8 +86,8 @@ export default {
             params = params || '';
 
             this.$http.get('/api/articles' + params).then((info) => {
-                this.articles = info.data.list;
-                this.articelLength = info.data.count;
+                this.articles = info.data.data;
+                this.articelLength = info.data.data.count;
             });
         }
     },

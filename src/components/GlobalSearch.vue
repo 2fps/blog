@@ -21,9 +21,9 @@ export default {
                 this.$router.push('/search?key=' + val);
                 // 设置搜索配置
                 this.$store.commit('setMode', {
-                    main: 'search',
-                    mode: '搜索',
-                    modeContent: val
+                    mode: 'search',
+                    modeDes: '搜索',
+                    con: val
                 });
             } else {
                 msg('error', 4);

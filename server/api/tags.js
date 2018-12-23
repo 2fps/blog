@@ -6,14 +6,17 @@ let Mock = require('mockjs');
 router.get('/', (req, res) => {
     var data = {
         "error_code": 0,
-        "data": [
-            {
-                "id": 1,
-                "name": 'Electron',
-                "alias": 'Electron',
-                "nums": 10
-            }
-        ]
+        "data": [{
+            "id": 1,
+            "name": 'Electron',
+            "alias": 'Electron',
+            "nums": 10
+        }, {
+            "id": 2,
+            "name": 'HTML',
+            "alias": 'HTML',
+            "nums": 11
+        }]
     };
     res.send(JSON.stringify(data));
 });

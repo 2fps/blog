@@ -7,6 +7,13 @@ const state = {
     siteUrl: '',    // 站点 url
     subTitle: '',   // 副标题
     numInpage: 10,  // 一页多少个文章
+
+    mode: '',       // 默认首页，或者搜索，tag等
+    modeDes: '',    // mode的描述
+    con: '',        // 具体内容
+
+
+
     // 标签相关
     tags: [/* {
         name: '显示名称',
@@ -16,6 +23,7 @@ const state = {
 
     // 分类目录
     classifyMenu: [/* {
+        "id": 123,  // id号
         name: '分类名称',
         alias: '别名',
         nums: '该分类共计数量'
@@ -52,9 +60,25 @@ const mutations = {
         state.words = data.words;
         state.imgSrc = data.profileUrl;
         state.numInpage = data.numInpage;
+        state.subTitle = data.subTitle;
+        state.siteUrl = data.siteUrl;
+        state.imgSrc = data.imgSrc;
+        state.CDNPath = data.CDNPath;
+        state.webRecord = data.webRecord;
     },
-    setTags: function() {
-
+    // 设置当前文章的显示模式
+    setMode: function(state, data) {
+        state.mode = data.mode;
+        state.modeDes = data.modeDes;
+        state.con = data.con;
+    },
+    setTags: function(state, data) {
+        state.tags.push({
+            id: data.id,
+            name: data.name,
+            alias: data.alias,
+            nums: data.nums
+        });
     }
 }
 

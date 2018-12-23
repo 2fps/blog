@@ -4,62 +4,21 @@ let Mock = require('mockjs');
 
 // 获取个人配置信息
 router.get('/', (req, res) => {
-    var data = Mock.mock({
-        "articles": [
-            {
-                "id": 0,
-                "title": '@csentence()',
-                "releaseTime": "@datetime",
-                "number|0-100": 10,
-                "catalogs": "Web前端",
-                "commentsNum|1-100": 10,
-                "viewsNum|0-100": 10,
-                "likeNum|0-100": 10,
-                // "content": "@cparagraph()",
-                "summary": "@cparagraph(10)"
-            }, {
-                "id": 1,
-                "title": '@csentence()',
-                "releaseTime": "@datetime",
-                "number|0-100": 10,
-                "catalogs": "Web前端",
-                "commentsNum|1-100": 10,
-                "viewsNum|0-100": 10,
-                "likeNum|0-100": 10,
-                "summary": "@cparagraph(10)"
-            }, {
-                "id": 2,
-                "title": '@csentence()',
-                "releaseTime": "@datetime",
-                "number|0-100": 10,
-                "catalogs": "Web前端",
-                "commentsNum|1-100": 10,
-                "viewsNum|0-100": 10,
-                "likeNum|0-100": 10,
-                "summary": "@cparagraph(10)"
-            }, {
-                "id": 3,
-                "title": '@csentence()',
-                "releaseTime": "@datetime",
-                "number|0-100": 10,
-                "catalogs": "Web前端",
-                "commentsNum|1-100": 10,
-                "viewsNum|0-100": 10,
-                "likeNum|0-100": 10,
-                "summary": "@cparagraph(10)"
-            }, {
-                "id": 4,
-                "title": '@csentence()',
-                "releaseTime": "@datetime",
-                "number|0-100": 10,
-                "catalogs": "Web前端",
-                "commentsNum|1-100": 10,
-                "viewsNum|0-100": 10,
-                "likeNum|0-100": 10,
-                "summary": "@cparagraph(10)"
-            }
-        ]
-    });
+    var data = {
+        error_code: 0,
+        data: [{
+            articleId: 123,  // 文章id
+            title: "我是文章名",
+            author: "作者名",
+            publishTime: 22434, // 文章发布时间戳
+            reg_time: "1436864169",
+            classifyName: ["分类名称"],
+            commentNums: 123,  // 评论数量
+            readNums: 123,   // 阅读数量
+            likeNums: 123,  // 点赞数量
+            brief: "文章的简略内容"
+        }]
+    };
     res.send(JSON.stringify(data));
 });
 
